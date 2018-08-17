@@ -2,8 +2,10 @@ package com.capgemini.capstore.beans;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="Admin_Details")
 public class Admin {
 
 	@Id

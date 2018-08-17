@@ -2,7 +2,7 @@ package com.capgemini.capstore.beans;
 
 import java.util.Date;
 
-import javax.persistence.Embedded;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Product")
+@Table(name="Product_Details")
 public class Product {
 
 	@Id
@@ -21,19 +21,19 @@ public class Product {
 	private String productDesc;
 	private int productSize;
 	private int productQuantity;
-	@OneToOne
+	@OneToOne(mappedBy="product",cascade=CascadeType.ALL)
 	private Rating productRating;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Merchant productMerchant;
 	private Date productAddDate;
 	private Date productDelDate;
-	@Embedded
+	@OneToOne(cascade=CascadeType.ALL)
 	private Category productCategory;
 	private double productPrice;
 	private int productViews;
-	@Embedded
+	@OneToOne(cascade=CascadeType.ALL)
 	private Image productImage;
-	@Embedded
+	@OneToOne(cascade=CascadeType.ALL)
 	private Discount productDiscount;
 	private String productBrand;
 

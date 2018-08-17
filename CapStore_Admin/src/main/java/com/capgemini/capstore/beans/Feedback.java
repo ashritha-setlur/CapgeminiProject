@@ -1,5 +1,6 @@
 package com.capgemini.capstore.beans;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,11 +15,11 @@ public class Feedback {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int feedbackId;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Customer customer;
 	private String typeOfFeedback;
 	private String feedbackDesc;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Product product;
 
 	//Constructors
