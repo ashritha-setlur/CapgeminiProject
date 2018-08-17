@@ -6,9 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 @Entity
 public class Address {
-@Id
-@GeneratedValue(strategy=GenerationType.AUTO)
-int address_id;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	int address_id;
 
 	private String addressLine1;
 	private String addressLine2;
