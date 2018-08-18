@@ -3,6 +3,8 @@ package com.capgemini.capstore.beans;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,6 +13,7 @@ import javax.persistence.Table;
 public class Promo {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int promoId;
 	private String promoType;
 	private String promoName;

@@ -2,6 +2,7 @@ package com.capgemini.capstore.beans;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +17,7 @@ public class Transaction {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int transactionId;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private PaymentMethod paymentMethod;
 	private Date transDate;
 	@OneToOne(mappedBy="transaction")
