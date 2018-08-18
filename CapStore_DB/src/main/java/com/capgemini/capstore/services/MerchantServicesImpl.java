@@ -1,11 +1,16 @@
 package com.capgemini.capstore.services;
 
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Merchant;
+import com.capgemini.capstore.beans.OrderDetails;
+import com.capgemini.capstore.beans.Product;
 import com.capgemini.capstore.repo.MerchantRepo;
 @Component
 public class MerchantServicesImpl implements MerchantServices {
