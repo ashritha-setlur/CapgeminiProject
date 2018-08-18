@@ -27,6 +27,17 @@ public class Address {
 	}
 
 
+	public Address(String addressLine1, String addressLine2, String city, String state, long pincode, String country) {
+		super();
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.city = city;
+		this.state = state;
+		this.pincode = pincode;
+		this.country = country;
+	}
+
+
 	//Getters and Setters
 	public String getAddressLine1() {
 		return addressLine1;
