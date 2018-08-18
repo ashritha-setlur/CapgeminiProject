@@ -64,4 +64,11 @@ public class Feedback {
 	public void setFeedbackDesc(String feedbackDesc) {
 		this.feedbackDesc = feedbackDesc;
 	}
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	
 }
