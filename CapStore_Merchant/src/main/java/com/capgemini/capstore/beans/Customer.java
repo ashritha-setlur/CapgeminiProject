@@ -2,7 +2,7 @@ package com.capgemini.capstore.beans;
 
 import java.util.Date;
 
-import javax.persistence.Embedded;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,11 +25,11 @@ public class Customer {
 	private Date dateOfBirth;
 	private Date dateOfReg;
 	private Date dateOfDel;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Address address;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Cart cart;
-	@Embedded
+	@OneToOne(cascade=CascadeType.ALL)
 	private Wishlist wishlist;
 
 	//Constructors

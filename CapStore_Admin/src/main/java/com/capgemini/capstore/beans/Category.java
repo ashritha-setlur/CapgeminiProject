@@ -1,23 +1,29 @@
 package com.capgemini.capstore.beans;
 
-import javax.persistence.Embeddable;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
-@Embeddable
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Category")
 public class Category {
-	
-	@NotNull
-	@NotEmpty
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int categoryId;
-	@NotNull
-	@NotEmpty
+	private int groupCategoryId;
 	private String categoryName;
-	@NotNull
-	@NotEmpty
 	private String categoryDesc;
-	
-	
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<Product> products; 
+
+
 	//Constructors
 	public Category() {
 		super();
@@ -35,9 +41,9 @@ public class Category {
 		this.categoryName = categoryName;
 		this.categoryDesc = categoryDesc;
 	}
-	
-	
-	
+
+
+
 	//Getters and Setters
 	public int getCategoryId() {
 		return categoryId;
@@ -61,5 +67,21 @@ public class Category {
 
 	public void setCategoryDesc(String categoryDesc) {
 		this.categoryDesc = categoryDesc;
+	}
+
+	public int getGroupCategoryId() {
+		return groupCategoryId;
+	}
+
+	public void setGroupCategoryId(int groupCategoryId) {
+		this.groupCategoryId = groupCategoryId;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 }

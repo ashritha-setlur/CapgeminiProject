@@ -10,14 +10,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="OrderDetails")
+@Table(name="Order_Details")
 public class OrderDetails {
 
 	@Id
 	private int orderId;
-	@OneToOne 
+	@OneToOne(cascade=CascadeType.ALL)
 	private Product product;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Customer customer;
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="transaction")
@@ -25,7 +25,7 @@ public class OrderDetails {
 	private Date deliveryDate;
 	private Date orderDate;
 	private String deliveryStatus;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Promo promo;
 	private double orderAmount;
 

@@ -1,37 +1,45 @@
 package com.capgemini.capstore.beans;
 
-import javax.persistence.Embeddable;
-import javax.persistence.OneToOne;
+import java.util.List;
 
-@Embeddable
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Wishlist")
 public class Wishlist {
-	
-	@OneToOne
-	private Product product;
-	private int quantity;
-	
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int wishlistId;
+
+	@OneToMany
+	private List<Product> products;
+
+
 	//Constructors
 	public Wishlist() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Wishlist(Product product, int quantity) {
-		super();
-		this.product = product;
-		this.quantity = quantity;
-	}
-	
+
 	//Getters and Setters
-	public Product getProduct() {
-		return product;
+	public List<Product> getProducts() {
+		return products;
 	}
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
-	public int getQuantity() {
-		return quantity;
+
+	public int getWishlistId() {
+		return wishlistId;
 	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+
+	public void setWishlistId(int wishlistId) {
+		this.wishlistId = wishlistId;
 	}
 }

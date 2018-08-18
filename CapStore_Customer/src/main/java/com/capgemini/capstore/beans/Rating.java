@@ -1,5 +1,6 @@
 package com.capgemini.capstore.beans;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,10 +15,10 @@ public class Rating {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int ratingId;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Product product;
 	private double rating;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Customer customer;
 	//Constructors
 	public Rating(int ratingId) {

@@ -1,20 +1,19 @@
 package com.capgemini.capstore.beans;
 
-import javax.persistence.Embeddable;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Embeddable
+@Entity
+@Table(name="Discount")
 public class Discount {
 
-	@NotNull
-	@NotEmpty
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int discountId;
-	@NotNull
-	@NotEmpty
 	private String discountName;
-	@NotNull
-	@NotEmpty
 	private String discountDesc;
 
 	//Constructors
@@ -23,13 +22,12 @@ public class Discount {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Discount(@NotNull @NotEmpty int discountId) {
+	public Discount(int discountId) {
 		super();
 		this.discountId = discountId;
 	}
 
-	public Discount(@NotNull @NotEmpty int discountId, @NotNull @NotEmpty String discountName,
-			@NotNull @NotEmpty String discountDesc) {
+	public Discount(int discountId,String discountName, String discountDesc) {
 		super();
 		this.discountId = discountId;
 		this.discountName = discountName;

@@ -1,7 +1,8 @@
 package com.capgemini.capstore.beans;
 
 import java.util.Date;
-import javax.persistence.Embedded;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Merchant")
+@Table(name="Merchant_Details")
 public class Merchant {
 
 	@Id
@@ -19,9 +20,9 @@ public class Merchant {
 	private String merchantName;
 	private String merchantEmail;
 	private String mobileNo;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Address merchantAddress;
-	@Embedded
+	@OneToOne(cascade=CascadeType.ALL)
 	private Inventory merchantInventory;
 	private double merchantRevPercent;
 	private Date dateOfReg;
