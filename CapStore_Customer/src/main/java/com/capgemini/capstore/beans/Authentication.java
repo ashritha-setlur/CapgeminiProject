@@ -11,7 +11,6 @@ import javax.persistence.Table;
 public class Authentication {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int authId;
 	private String mobileNo;
 	private String password;
@@ -23,8 +22,9 @@ public class Authentication {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Authentication(String mobileNo, String password, String userAccess, int verification) {
+	public Authentication(int authId, String mobileNo, String password, String userAccess, int verification) {
 		super();
+		this.authId = authId;
 		this.mobileNo = mobileNo;
 		this.password = password;
 		this.userAccess = userAccess;
