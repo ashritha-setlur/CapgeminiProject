@@ -5,16 +5,23 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Merchant;
+import com.capgemini.capstore.beans.Product;
 import com.capgemini.capstore.repo.AuthenticationRepo;
+import com.capgemini.capstore.repo.CustomerRepo;
 import com.capgemini.capstore.repo.MerchantRepo;
+import com.capgemini.capstore.repo.ProductRepo;
 @Service
 public class CapStoreAdminServicesImplementation implements CapStoreAdminServices {
 	@Autowired
     public MerchantRepo merchantRepo;
 	@Autowired
     public AuthenticationRepo aRepo;
-
+	@Autowired
+	public ProductRepo productRepo;
+	@Autowired
+	public CustomerRepo customerRepo;
 
 	@Override
 	public void addThirdPartyMerchant(int merchantId)  {
@@ -42,5 +49,35 @@ public class CapStoreAdminServicesImplementation implements CapStoreAdminService
 	public List<Merchant> viewThirdPartyMerchant() {
 		return merchantRepo.getThirdPartyMerchant();
 
+	}
+	
+	@Override
+	public int addMerchant(Merchant merchant) {
+		merchantRepo.save(merchant);
+		return  merchant.getMerchantId();
+	}
+
+	@Override
+	public Merchant displaySingleMerchant(int merchantId) {
+		Merchant merchant = merchantRepo.getOne(merchantId);
+		return merchant;
+	}
+	
+	@Override
+	public  List<Customer> displayAllCustomers() {
+
+		return customerRepo.findAll();
+	}
+
+	@Override
+	public List<Merchant> displayAllMerchants() {
+
+		return merchantRepo.findAll();
+	}
+
+	@Override
+	public List<Product> displayAllProducts() {
+
+		return productRepo.findAll();
 	}
 }
