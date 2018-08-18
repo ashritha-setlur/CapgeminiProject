@@ -11,7 +11,6 @@ import javax.persistence.Table;
 public class Authentication {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int authId;
 	private String mobileNo;
 	private String password;
