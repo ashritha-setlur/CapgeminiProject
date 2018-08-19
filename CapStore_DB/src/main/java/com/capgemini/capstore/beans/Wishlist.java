@@ -17,26 +17,29 @@ public class Wishlist {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int wishlistId;
 
-	@OneToMany
-	private List<Product> products;
+	@OneToMany(targetEntity=Product.class)
+	private List product;
 
 
 	//Constructors
 	public Wishlist() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	//Getters and Setters
-	public List<Product> getProducts() {
-		return products;
-	}
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
+	
 
 	public int getWishlistId() {
 		return wishlistId;
+	}
+
+	public List getProduct() {
+		return product;
+	}
+
+	public void setProduct(List product) {
+		this.product = product;
 	}
 
 	public void setWishlistId(int wishlistId) {
