@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,7 +22,7 @@ public class Product {
 	private String productDesc;
 	private int productSize;
 	private int productQuantity;
-	@OneToOne(mappedBy="product",cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Rating productRating;
 	@OneToOne(cascade=CascadeType.ALL)
 	private Merchant productMerchant;
@@ -190,4 +191,15 @@ public class Product {
 	public void setProductBrand(String productBrand) {
 		this.productBrand = productBrand;
 	}
+
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", productName=" + productName + ", productDesc=" + productDesc
+				+ ", productSize=" + productSize + ", productQuantity=" + productQuantity + ", productRating="
+				+ productRating + ", productMerchant=" + productMerchant + ", productAddDate=" + productAddDate
+				+ ", productDelDate=" + productDelDate + ", productCategory=" + productCategory + ", productPrice="
+				+ productPrice + ", productViews=" + productViews + ", productImage=" + productImage
+				+ ", productDiscount=" + productDiscount + ", productBrand=" + productBrand + "]";
+	}
+
 }

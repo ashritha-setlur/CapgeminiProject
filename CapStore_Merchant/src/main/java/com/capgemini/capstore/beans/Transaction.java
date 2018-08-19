@@ -20,16 +20,14 @@ public class Transaction {
 	@OneToOne(cascade=CascadeType.ALL)
 	private PaymentMethod paymentMethod;
 	private Date transDate;
-	@OneToOne(mappedBy="transaction")
-	private OrderDetails order;
+	
 
 	//Constructors
-	public Transaction(int transactionId, PaymentMethod paymentMethod, Date transDate, OrderDetails order) {
+	public Transaction(int transactionId, PaymentMethod paymentMethod, Date transDate) {
 		super();
 		this.transactionId = transactionId;
 		this.paymentMethod = paymentMethod;
 		this.transDate = transDate;
-		this.order = order;
 	}
 
 	public Transaction(int transactionId) {
@@ -60,12 +58,4 @@ public class Transaction {
 	public void setTransDate(Date transDate) {
 		this.transDate = transDate;
 	}
-	public OrderDetails getOrder() {
-		return order;
-	}
-	public void setOrder(OrderDetails order) {
-		this.order = order;
-	}
-
-
 }
