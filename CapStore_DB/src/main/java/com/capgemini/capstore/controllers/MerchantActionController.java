@@ -1,6 +1,7 @@
 package com.capgemini.capstore.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,8 +33,15 @@ private GenerateInvoice invoice;
 	
 	}
 		
+	//controller to test through postman
 	@RequestMapping(value="/getInvoice", method=RequestMethod.GET)
 	public int getInvoice(int customerId,int productId, int orderAmount,int transactionId) {
+		return invoice.generateInvoice(customerId, productId, orderAmount,transactionId);	
+	}
+	
+	//controller to call
+	@RequestMapping(value="/getInvoice/{customerId,productId,orderAmount,transactionId}", method=RequestMethod.GET)
+	public int generateInvoice(@Param("customerId") int customerId, @Param("productId")int productId, @Param("orderAmount") int orderAmount,@Param("transactionId")int transactionId) {
 		return invoice.generateInvoice(customerId, productId, orderAmount,transactionId);	
 	}
 
