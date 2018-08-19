@@ -9,13 +9,13 @@ import com.capgemini.capstore.beans.Product;
 import com.capgemini.capstore.beans.Transaction;
 
 public interface OrderDetailsRepo extends JpaRepository<OrderDetails, Integer> {
-
+	
 @Query("select c from Customer c where c.id=?1")
 public Customer findCustomerByCustomerId(int customerId);
-
+	
 @Query("select p from Product p where p.productId=?1")
 public Product findProductByProductId(int productId);
-
+	
 @Query("select t from Transaction t where t.transactionId=?1")
 public Transaction findtransactionBytransactionId(int transactionId);
 }
