@@ -8,18 +8,21 @@
 										{
 											"productId":2,
 											"productName":"IPhone X",
+											"product Desc" : "The Latest Flagship From Apple",
 											"productQuantity": 10,
 											"productBrand": "Apple"
 										},
 										{
 											"productId":7,
 											"productName":"Pixel 3",
+											"product Desc" : "The Latest Flagship From Google",
 											"productQuantity": 10,
 											"productBrand": "Google"
 										},
 										{
 											"productId":9,
 											"productName":"Galaxy X",
+											"product Desc" : "The Latest Flagship From Samsung",
 											"productQuantity": 10,
 											"productBrand": "Samsung"
 										}
@@ -29,24 +32,27 @@
 	"categoryId":2,
 	"groupCategoryId":1,
 	"categoryName":"Laptops",
-	"categoryDesc":"Electronics",
+	"categoryDesc":"Sample",
 	"products":
 							[
 										{
 											"productId":1,
 											"productName":"IdeaPad 520",
+											"product Desc" : "A very affordable and powerful laptop",
 											"productQuantity": 10,
 											"productBrand": "Lenovo"
 										},
 										{
 											"productId":5,
 											"productName":"XPS 13",
+											"product Desc" : "Dell's very best",
 											"productQuantity": 10,
 											"productBrand": "Dell"
 										},
 										{
 											"productId":4,
 											"productName":"MacBook",
+											"product Desc" : "For the creationists!",
 											"productQuantity": 10,
 											"productBrand": "Apple"
 										}
@@ -61,9 +67,10 @@
 							[
 										{
 											"productId":11,
-											"productName":"IPhone X",
+											"productName":"Levi's Denim",
+											"product Desc" : "Live in Style",
 											"productQuantity": 10,
-											"productBrand": "Apple"
+											"productBrand": "Levi's'"
 										},
 										{
 											"productId":14,

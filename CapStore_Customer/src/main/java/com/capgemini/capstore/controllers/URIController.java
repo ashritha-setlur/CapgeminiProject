@@ -1,15 +1,25 @@
 package com.capgemini.capstore.controllers;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.capgemini.capstore.beans.Category;
 
 
 @Controller
 public class URIController {
 
 	@RequestMapping(value="/")
-	public String getHomePage() {
-		return "index";
+	public ModelAndView getHomePage() {
+		RestTemplate restTemplate = new RestTemplate();
+		Category[] displayCategories = restTemplate.getForObject("http://localhost:4496/sample.json",Category[].class);
+		List<Category> categoryList = Arrays.asList(displayCategories);
+		return new ModelAndView("index","categories",categoryList);
 	}
 	
 	@RequestMapping(value="/getLogin")
