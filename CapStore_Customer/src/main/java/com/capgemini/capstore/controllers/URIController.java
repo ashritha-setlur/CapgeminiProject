@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +29,8 @@ public class URIController {
 	@RequestMapping(value="/registerCustomer")
 	public void registerCustomer(HttpServletRequest request) {
 		
+		JSONObject jSon=new JSONObject();
+		
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String mobileNo = request.getParameter("mobileNo");
@@ -41,6 +44,8 @@ public class URIController {
 		String state = request.getParameter("state");
 		String country = request.getParameter("country");
 		String pincode = request.getParameter("pincode");
+		
+		
 				
 		
 	}
