@@ -9,12 +9,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="Order_Details")
 public class OrderDetails {
 
 	@Id
 	private int orderId;
+	@JsonIgnore
 	@OneToOne(cascade=CascadeType.ALL)
 	private Product product;
 	@OneToOne(cascade=CascadeType.ALL)
