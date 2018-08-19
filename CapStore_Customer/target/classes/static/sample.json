@@ -1,13 +1,82 @@
 [{
-	"id":1,
-	"name":"Mens"
+	"categoryId":1,
+	"groupCategoryId":1,
+	"categoryName":"Mobiles",
+	"categoryDesc":"Electronics",
+	"products":
+							[
+										{
+											"productId":2,
+											"productName":"IPhone X",
+											"productQuantity": 10,
+											"productBrand": "Apple"
+										},
+										{
+											"productId":7,
+											"productName":"Pixel 3",
+											"productQuantity": 10,
+											"productBrand": "Google"
+										},
+										{
+											"productId":9,
+											"productName":"Galaxy X",
+											"productQuantity": 10,
+											"productBrand": "Samsung"
+										}
+							]
 },
 {
-	"id":2,
-	"name":"Womens"
+	"categoryId":2,
+	"groupCategoryId":1,
+	"categoryName":"Laptops",
+	"categoryDesc":"Electronics",
+	"products":
+							[
+										{
+											"productId":1,
+											"productName":"IdeaPad 520",
+											"productQuantity": 10,
+											"productBrand": "Lenovo"
+										},
+										{
+											"productId":5,
+											"productName":"XPS 13",
+											"productQuantity": 10,
+											"productBrand": "Dell"
+										},
+										{
+											"productId":4,
+											"productName":"MacBook",
+											"productQuantity": 10,
+											"productBrand": "Apple"
+										}
+							]
 },
 {
-	"id":3,
-	"name":"Kids"
+	"categoryId":3,
+	"groupCategoryId":1,
+	"categoryName":"Men's Apparel",
+	"categoryDesc":"Clothing for MEN",
+	"products":
+							[
+										{
+											"productId":11,
+											"productName":"IPhone X",
+											"productQuantity": 10,
+											"productBrand": "Apple"
+										},
+										{
+											"productId":14,
+											"productName":"IPhone X",
+											"productQuantity": 10,
+											"productBrand": "Apple"
+										},
+										{
+											"productId":12,
+											"productName":"IPhone X",
+											"productQuantity": 10,
+											"productBrand": "Apple"
+										}
+							]
 }
 ]
