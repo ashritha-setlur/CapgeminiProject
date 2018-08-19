@@ -36,4 +36,20 @@ public class URIController {
 	public String getCheckoutPage() {
 		return "checkout";
 	}
+	
+	@RequestMapping(value="/getContact")
+	public String getContactPage() {
+		return "contact";
+	}
+	
+	@RequestMapping(value="/getCategory")
+	public String getCategoryPage() {
+		return "category";
+	}
+	
+	@RequestMapping(value="/getCustomerProfile")
+	public String getCustomerProfilePage() {
+		return "customerProfile";
+	}
+	
 }
