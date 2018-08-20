@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.capstore.beans.Address;
 import com.capgemini.capstore.beans.Authentication;
+import com.capgemini.capstore.beans.Cart;
 import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Feedback;
 import com.capgemini.capstore.beans.OrderDetails;
@@ -173,5 +174,18 @@ public class CustomerActionController {
 		return rate;
 
 	}
+	
+	@RequestMapping(value="/validatePromo" ,method=RequestMethod.GET)
+	public void promovalidate(int orderId, String promo)
+	{
+		customerServices.coupon(orderId,promo);
+	}
+	
+	@RequestMapping(value="/applydiscount", method=RequestMethod.GET)
+	public Cart applydiscount(int cartId)
+	{
+		return customerServices.discount(cartId);
+	}
+	
 
 }

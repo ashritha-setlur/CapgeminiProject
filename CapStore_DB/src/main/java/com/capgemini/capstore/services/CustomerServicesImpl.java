@@ -1,6 +1,7 @@
 package com.capgemini.capstore.services;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -14,13 +15,17 @@ import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Feedback;
 import com.capgemini.capstore.beans.OrderDetails;
 import com.capgemini.capstore.beans.Product;
+import com.capgemini.capstore.beans.Promo;
 import com.capgemini.capstore.beans.Rating;
 import com.capgemini.capstore.beans.Transaction;
 import com.capgemini.capstore.beans.Wishlist;
 import com.capgemini.capstore.repo.AuthenticationRepo;
 import com.capgemini.capstore.repo.CartRepo;
+import com.capgemini.capstore.repo.CouponsRepo;
 import com.capgemini.capstore.repo.CustomerRepo;
+import com.capgemini.capstore.repo.DiscountDAO;
 import com.capgemini.capstore.repo.FeedbackRepo;
+import com.capgemini.capstore.repo.OrderDAO;
 import com.capgemini.capstore.repo.OrderDetailsRepo;
 import com.capgemini.capstore.repo.ProductRepo;
 import com.capgemini.capstore.repo.RatingRepo;
@@ -52,6 +57,15 @@ public class CustomerServicesImpl implements CustomerServices {
 
 	@Autowired
 	private AuthenticationRepo aRepo;
+	
+	@Autowired
+	 CouponsRepo couponsdao;
+	
+	@Autowired
+	OrderDAO orderdao;
+	
+	@Autowired
+	 DiscountDAO discountDAO;
 
 	private static int orderId=100;
 
@@ -269,5 +283,50 @@ public class CustomerServicesImpl implements CustomerServices {
 		//Service layer function which retrieves the details of customer
 		return customerRepo.getShipmentDetails(customerId);		
 	}
+	
+	@Override
+	public double coupon( int orderid,String promoName) {
+		Promo promo = couponsdao.findBypromoId(promoName);
+		OrderDetails order= orderdao.getOrderDetails(orderid);
+		if(promo!=null)
+		{
+			LocalDate localdate = LocalDate.now();
+			Date date1= Date.valueOf(localdate);
+			if(promo.getStartDate().before(date1)&&promo.getEndDate().after(date1)&&order.getOrderAmount()>promo.getPromoQuantity())
+			{
+				order.setOrderAmount(order.getOrderAmount()-promo.getPromoQuantity());
+				
+				orderdao.save(order);
+				System.out.println("promo added sucessfully");
+			}
+		}
+		else
+		{
+			System.out.println("Invalid code");
+		}
+		return 0;
+	}
+	
+	
+
+	@Override
+	public Cart discount(int cartId) {
+		Cart products= discountDAO.findByDiscountId(cartId);
+		System.out.println(products);
+		List<Product> productlist= products.getProducts();
+		for(Product product:productlist)
+		{
+			String discount = product.getProductDiscount().getDiscountDesc();
+			int discount1= Integer.parseInt(discount);
+			float discountprice = (float) (0.01*discount1);
+   		double price =  product.getProductPrice();
+   		String finalprice= Double.toString(price-(price*discountprice));
+   		product.getProductDiscount().setDiscountDesc(finalprice);
+		}
+
+		discountDAO.save(products);
+		return products;
+	}
+	
 }
 
