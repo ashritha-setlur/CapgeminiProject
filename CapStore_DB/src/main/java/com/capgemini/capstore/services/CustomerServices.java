@@ -13,8 +13,10 @@ import com.capgemini.capstore.beans.Wishlist;
 
 public interface CustomerServices {
 
+
+	
 	public Feedback addFeedback(Feedback feedBack);
-	public List<Feedback> getFeedbacks(int id);
+	public List<String> getFeedbacks(int id);
 	public void addCart(int custId) ;
 	public Product addProductToCart(int prodId,int custId) ;
 	public Product removeProductFromCart(int prodId,int custId) ;
