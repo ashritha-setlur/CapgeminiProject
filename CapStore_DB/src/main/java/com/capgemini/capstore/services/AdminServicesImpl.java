@@ -11,11 +11,13 @@ import org.springframework.stereotype.Component;
 
 import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Merchant;
+import com.capgemini.capstore.beans.OrderDetails;
 import com.capgemini.capstore.beans.Product;
 import com.capgemini.capstore.repo.AdminRepo;
 import com.capgemini.capstore.repo.AuthenticationRepo;
 import com.capgemini.capstore.repo.CustomerRepo;
 import com.capgemini.capstore.repo.MerchantRepo;
+import com.capgemini.capstore.repo.OrderDetailsRepo;
 import com.capgemini.capstore.repo.ProductRepo;
 import com.capgemini.capstore.repo.RatingRepo;
 
@@ -37,6 +39,8 @@ public class AdminServicesImpl implements AdminServices {
 	private AuthenticationRepo aRepo;
 	@Autowired
 	private RatingRepo ratingRepo;
+	@Autowired
+	private OrderDetailsRepo orderDetailsRepo;
 //	@Autowired
 //	private OrderDetailsRepo orderDetailsRepo;
 //	
@@ -154,5 +158,30 @@ public class AdminServicesImpl implements AdminServices {
 		}
 		return product_Avg_list;
 	}
+	
+	//Updates the inventory after the product is successfully delivered to the customer
+	@Override
+	public OrderDetails deliveringProducts(int orderId) {
+		
+		
+		OrderDetails orderDetails=orderDetailsRepo.deliveringProducts(orderId);
+		if(orderDetails.getDeliveryStatus().equalsIgnoreCase("delivered"))
+		{
+			Product deliverproduct = orderDetails.getProduct();
+			
+				int qty=deliverproduct.getProductQuantity()-1;
+				deliverproduct.setProductQuantity(qty);
+				
+				
+			
+			orderDetailsRepo.save(orderDetails);
+			return orderDetails;
+		}
+		else 
+		{
+			return orderDetails;
+		}
+	}
+
 }
 

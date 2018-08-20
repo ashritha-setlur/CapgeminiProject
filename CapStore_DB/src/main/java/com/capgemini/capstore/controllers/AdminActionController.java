@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Merchant;
+import com.capgemini.capstore.beans.OrderDetails;
 import com.capgemini.capstore.beans.Product;
 import com.capgemini.capstore.services.AdminServices;
 
@@ -89,6 +90,12 @@ public class AdminActionController {
 	public List<Merchant> deleteThirdPartyMerchant(int merchantId) {
 		adminServices.deleteThirdPartyMerchant(merchantId);
 		return adminServices.viewThirdPartyMerchant();
+	}
+	
+	@RequestMapping(value="/deliveryproducts",method=RequestMethod.GET)
+	public OrderDetails quantityupdate1(int OrderId)
+	{
+		return adminServices.deliveringProducts(OrderId);
 	}
 	
 }
