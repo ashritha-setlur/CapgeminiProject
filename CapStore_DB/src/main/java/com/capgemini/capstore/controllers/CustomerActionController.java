@@ -98,6 +98,27 @@ public class CustomerActionController {
 		{
 			mservices.updateCustomer(customer);
 		}*/
+	
+	//add wishlist to customer object (only once)
+	@RequestMapping(value="/addWishlist")
+	public void addWishlist(int cid)
+	{
+		customerServices.addWishlist(cid);
+	}
+	//add product into the wishlist
+	@RequestMapping(value="/addItemToWishlist")
+	public Product addProduct(int pid,int cid)
+	{
+		return customerServices.addItemToWishlist(pid,cid);
+	}
+	//remove product from the wishlist
+	@RequestMapping(value="/removeItemFromWishlist")
+	public void delProduct(int pid,int cid)
+	{
+		customerServices.removeItemFromWishlist(pid,cid);
+	}
+	
+	
 	//customer can display his wishlist
 	@RequestMapping(value="/display" , method=RequestMethod.GET)
 	public Wishlist display (int custid) {
