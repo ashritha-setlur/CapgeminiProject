@@ -58,15 +58,6 @@ public class CustomerServicesImpl implements CustomerServices {
 	@Autowired
 	private AuthenticationRepo aRepo;
 
-	@Autowired
-	private AdminRepo adminRepo;
-	
-	@Autowired
-	private MerchantRepo merchantRepo ;
-	
-    @Autowired
-    TransactionRepo transactionrepo;
-	
 	private static int orderId1=100;
 
 	@Override
@@ -155,39 +146,6 @@ public class CustomerServicesImpl implements CustomerServices {
 		return new Date(c.getTimeInMillis());
 	}
 
-	//updating revenue of capstore and merchant
-	public boolean updateCapRevenue(double amount, int productId)
-	{
-		Product product=orderDetailsRepo.findProductByProductId(productId);
-		Merchant merchant=product.getProductMerchant();
-		double totalPrice=product.getProductPrice();
-		double percent=merchant.getMerchantRevPercent();
-		double capstoreShare=(percent/100)*totalPrice;
-		double merchantShare=totalPrice-capstoreShare;
-		adminRepo.addCapstoreRevenue(capstoreShare);
-		merchantRepo.addMerchantRevenue(merchant.getMerchantId(),merchant.getMerchantRevenue()+merchantShare);
-		return true;	
-	}
-	
-	//returns transaction number to calling method
-	public int savetransaction(int paymentMethod)
-	{
-		Transaction transaction = new Transaction();
-		java.sql.Date transDate = new java.sql.Date(new java.util.Date().getTime());
-		transaction.setTransDate(transDate);
-		if(paymentMethod==1)
-		{
-			transaction.setPaymentMethod(new PaymentMethod(1,0));
-		}else
-		{
-			transaction.setPaymentMethod(new PaymentMethod(0,1));
-		}
-		
-		transactionrepo.save(transaction);
-		
-		System.out.println(transaction.getTransactionId());
-		return transaction.getTransactionId();		
-	}
 	
 	//OrderedItemsDisplay
 	@Override

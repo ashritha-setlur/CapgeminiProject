@@ -186,25 +186,5 @@ public class CustomerActionController {
 		return customerServices.generateInvoice(customerId, productId, orderAmount,transactionId);	
 	}
 	
-	//controller to test through postman to get transaction number
-	@RequestMapping(value="/gettrans", method=RequestMethod.GET)
-	public int gettransaction( int method) {
-		return  customerServices.savetransaction(method);
-	}
-	
-	
-	//controller to call transaction number
-	@RequestMapping(value="/gettrans/{method}", method=RequestMethod.GET)
-	public int generatetransaction(@Param(value="method") int method) {
-		return  customerServices.savetransaction(method);
-	}
-	
-	
-	//controller to call update CapStore_Revenue
-	@RequestMapping(value="/gettrans/{amount,productId}", method=RequestMethod.GET)
-	public boolean updateCapRevenue(@Param(value="amount") double amount,@Param(value="productId") int productId) {
-		return  customerServices.updateCapRevenue(amount,productId);
-	}
-	
 	
 }

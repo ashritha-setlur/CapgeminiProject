@@ -21,9 +21,4 @@ public interface AdminRepo extends JpaRepository<Admin, Integer>, CrudRepository
 	@Transactional
 	@Query("update Admin a set a.capstoreRevenue= a.capstoreRevenue-?1")
 	void updateAdminRevenue(double adminPrice);
-	
-	@Modifying
-	@Transactional
-	@Query("update Admin a set a.capstoreRevenue=a.capstoreRevenue+?1")
-	public double addCapstoreRevenue(double amount);
 }
