@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="Rating")
 public class Rating {
@@ -15,9 +17,11 @@ public class Rating {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int ratingId;
+	@JsonIgnore
 	@OneToOne(cascade=CascadeType.ALL)
 	private Product product;
 	private double rating;
+	@JsonIgnore
 	@OneToOne(cascade=CascadeType.ALL)
 	private Customer customer;
 	//Constructors
