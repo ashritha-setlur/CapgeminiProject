@@ -50,13 +50,6 @@ public class CustomerActionController {
 
 	}
 
-	//add cart to customer object (only once)
-	//  (http://localhost:4496/addCart?custId=1)
-	@RequestMapping(value="/addCart",produces=MediaType.APPLICATION_JSON_VALUE)
-	public void addCartToCustomer(int custId) {
-		customerServices.addCart(custId);
-	}
-
 	//add product into the cart
 	//  (http://localhost:4496/addToCart?prodId=1&custId=1)
 	@RequestMapping(value="/addToCart",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
