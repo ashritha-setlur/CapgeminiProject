@@ -14,8 +14,6 @@ import com.capgemini.capstore.beans.Wishlist;
 
 public interface CustomerServices {
 
-
-
 	public Feedback addFeedback(Feedback feedBack);
 	public List<String> getFeedbacks(int id);
 	public void addCart(int custId) ;

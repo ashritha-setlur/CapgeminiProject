@@ -32,7 +32,6 @@ public class LoginServicesImpl implements UserDetailsService {
 		}
 
 		System.out.println("Found User: " +authenticate);
-
 		// [ROLE_USER, ROLE_ADMIN,..]
 		List<String> roleNames = this.loginRepo.getRoleNames(authenticate.getMobileNo());
 
@@ -44,9 +43,7 @@ public class LoginServicesImpl implements UserDetailsService {
 				grantList.add(authority);
 			}
 		}
-
 		UserDetails userDetails = (UserDetails) new User(authenticate.getMobileNo(),authenticate.getPassword(), grantList);
-
 		return userDetails;
 	}
 
