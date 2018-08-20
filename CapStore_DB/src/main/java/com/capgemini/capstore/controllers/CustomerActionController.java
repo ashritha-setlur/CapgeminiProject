@@ -156,7 +156,7 @@ public class CustomerActionController {
 		customerServices.registerCustomer(customerObj,auth);
 		return "success";
 	}
-	//Search for Products(by product name,product brand and category name)
+	//Search for Products(by product name,product brand)
 	@RequestMapping(method=RequestMethod.POST, value={"/searchAction"},produces=MediaType.APPLICATION_JSON_VALUE)
 	public ArrayList<Product> search(@RequestBody String jSon) throws JSONException{
 		JSONObject json=new JSONObject(jSon);

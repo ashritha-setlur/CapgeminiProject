@@ -1,5 +1,7 @@
 package com.capgemini.capstore.services;
 
-public interface MerchantServices {
+import com.capgemini.capstore.beans.Merchant;
 
+public interface MerchantServices {
+	public Merchant registerMerchant(Merchant merchant, String password, String type);
 }

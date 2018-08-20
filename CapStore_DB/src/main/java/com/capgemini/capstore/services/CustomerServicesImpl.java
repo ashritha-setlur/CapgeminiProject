@@ -264,6 +264,7 @@ public class CustomerServicesImpl implements CustomerServices {
 		product1=productRepo.findProductName(product);
 		return product1;
 	}
+	
 	@Override
 	public Customer retrieveShipmentDetails(int customerId) {
 		//Service layer function which retrieves the details of customer
