@@ -17,6 +17,7 @@ import com.capgemini.capstore.beans.Product;
 import com.capgemini.capstore.beans.Rating;
 import com.capgemini.capstore.beans.Transaction;
 import com.capgemini.capstore.beans.Wishlist;
+import com.capgemini.capstore.repo.AdminRepo;
 import com.capgemini.capstore.repo.AuthenticationRepo;
 import com.capgemini.capstore.repo.CartRepo;
 import com.capgemini.capstore.repo.CustomerRepo;
@@ -52,7 +53,7 @@ public class CustomerServicesImpl implements CustomerServices {
 
 	@Autowired
 	private AuthenticationRepo aRepo;
-
+		
 	private static int orderId=100;
 
 	@Override
