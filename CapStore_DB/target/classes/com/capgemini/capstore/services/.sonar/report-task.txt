@@ -1,0 +1,5 @@
+projectKey=CapgeminiProject
+serverUrl=http://localhost:9000
+dashboardUrl=http://localhost:9000/dashboard/index/CapgeminiProject
+ceTaskId=AWVW_M1RwR4qg4MNnj_x
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AWVW_M1RwR4qg4MNnj_x
