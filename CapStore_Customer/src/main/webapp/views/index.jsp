@@ -224,9 +224,9 @@
                             </div>
                             <!-- Product Description -->
                             <div class="product-description">
-                                <span></span>
+                                <span>${category.products[0].productName} </span>
                                 <a href="single-product-details.html">
-                                    <h6></h6>
+                                    <h6>${category.products[0].productDesc} </h6>
                                 </a>
                                 <p class="product-price">$80.00</p>
 
