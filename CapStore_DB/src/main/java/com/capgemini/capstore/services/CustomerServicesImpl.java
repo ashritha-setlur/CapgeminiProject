@@ -13,16 +13,19 @@ import com.capgemini.capstore.beans.Authentication;
 import com.capgemini.capstore.beans.Cart;
 import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Feedback;
+import com.capgemini.capstore.beans.Merchant;
 import com.capgemini.capstore.beans.OrderDetails;
 import com.capgemini.capstore.beans.Product;
 import com.capgemini.capstore.beans.Promo;
 import com.capgemini.capstore.beans.Rating;
 import com.capgemini.capstore.beans.Transaction;
 import com.capgemini.capstore.beans.Wishlist;
+import com.capgemini.capstore.repo.AdminRepo;
 import com.capgemini.capstore.repo.AuthenticationRepo;
 import com.capgemini.capstore.repo.CartRepo;
 import com.capgemini.capstore.repo.CustomerRepo;
 import com.capgemini.capstore.repo.FeedbackRepo;
+import com.capgemini.capstore.repo.MerchantRepo;
 import com.capgemini.capstore.repo.OrderDetailsRepo;
 import com.capgemini.capstore.repo.ProductRepo;
 import com.capgemini.capstore.repo.PromoRepo;
@@ -58,7 +61,11 @@ public class CustomerServicesImpl implements CustomerServices {
 
 	@Autowired
 	private PromoRepo promoRepo;
-
+	@Autowired
+	private AdminRepo adminRepo;
+	@Autowired
+    private MerchantRepo merchantRepo;
+	
 	private static int orderId=100;
 
 	@Override
@@ -309,5 +316,20 @@ public class CustomerServicesImpl implements CustomerServices {
 		cartRepo.save(cartProducts);
 		return cartProducts;
 	}
+	
+	//updating revenue of capstore and merchant
+		public boolean updateCapRevenue(double amount, int productId)
+		{
+			Product product=orderDetailsRepo.findProductByProductId(productId);
+			Merchant merchant=product.getProductMerchant();
+			double totalPrice=product.getProductPrice();
+			double percent=merchant.getMerchantRevPercent();
+			double capstoreShare=(percent/100)*totalPrice;
+			double merchantShare=totalPrice-capstoreShare;
+			adminRepo.addCapstoreRevenue(capstoreShare);
+			merchantRepo.addMerchantRevenue(merchant.getMerchantId(),merchant.getMerchantRevenue()+merchantShare);
+			return true;	
+		}
+
 }
 
