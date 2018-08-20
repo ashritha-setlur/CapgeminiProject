@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,7 +18,7 @@ public class Wishlist {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int wishlistId;
 
-	@OneToMany
+	@ManyToMany
 	private List<Product> products;
 
 
