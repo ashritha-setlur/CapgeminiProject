@@ -32,6 +32,17 @@
     var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     return re.test(str);
   }
+//   function getFormData($form)
+//   {
+// 	    var unindexed_array = $form.serializeArray();
+// 	    var indexed_array = {};
+
+// 	    $.map(unindexed_array, function(n, i){
+// 	        indexed_array[n['name']] = n['value'];
+// 	    });
+
+// 	    return indexed_array;
+//   }
 
   function checkForm(form)
   {
@@ -46,10 +57,20 @@
       form.password1.focus();
       return false;
     }
+//     var $form = $("#cust_register");
+//     var formData = getFormData($form);
 	//alert("Password has been changed");
-    return true;
+     var formData = JSON.stringify($("#cust_register").serializeArray());
+    $.ajax({
+  	  type: "POST",
+  	  url: "http://localhost:4496/registerCustomer",
+  	  data: formData,
+  	  success: function(){},
+  	  dataType: "json",
+  	  contentType : "application/json"
+  	});
   }
-
+     
 </script>
 
 
@@ -122,7 +143,7 @@
 		<div><br></div>
             <div class="row">
 				<div class="col-md-6">
-			<form name="cust_register" class="form-horizontal" onsubmit="return checkForm(this);" action="registerCustomer" method="POST">
+			<form name="cust_register" id="cust_register" class="form-horizontal" onsubmit="return checkForm(this);" action="registerCustomer" method="POST">
               <div class="box-body">
 			  <div class="form-group">
                   <label for="firstName" class="col-sm-6 control-label">First Name</label>
@@ -238,7 +259,7 @@
 		   <div class="col-md-3"></div>
 		   <div class="col-md-6">
 		    <div id="RegisterBtn" class="box-footer">
-                <button type="submit"  class="col-sm-10 btn essence-btn">Register</button>
+                <button type="submit" class="col-sm-10 btn essence-btn">Register</button>
               </div>
 			  </form>
 			  </div>
@@ -299,20 +320,6 @@
     <script src="../resources/js/active.js"></script>
 	<!-- Form Validation -->
 	
-<!-- 	<script> -->
-// 	function onSubmit(){
-// 	var formData = JSON.stringify($("#cust_register").serializeArray());
-// 	$.ajax({
-// 		  type: "POST",
-// 		  url: "http://localhost:4496/registerCustomer",
-// 		  data: formData,
-// 		  success: function(){},
-// 		  dataType: "json",
-// 		  contentType : "application/json"
-// 		});
-// 	}
-<!-- 	</script> -->
-		
 </body>
 
 </html>

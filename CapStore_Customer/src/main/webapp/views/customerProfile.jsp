@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +11,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>CapStore | Checkout</title>
+    <title>CapStore | Customer Profile</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="../resources/img/core-img/favicon.ico">
@@ -91,7 +90,60 @@
     </header>
     <!-- ##### Header Area End ##### -->
 
-    
+    <!-- ##### Right Side Cart Area ##### -->
+    <div class="cart-bg-overlay"></div>
+
+    <div class="right-side-cart-area">
+
+        <!-- Cart Button -->
+        <div class="cart-button">
+            <a href="#" id="rightSideCart"><img src="../resources/img/core-img/bag.svg" alt=""> <span><!--add product quantity--></span></a>
+        </div>
+
+        <div class="cart-content d-flex">
+
+            <!-- Cart List Area -->
+            <div class="cart-list">
+                <!-- Single Cart Item -->
+                <div class="single-cart-item">
+                    <a href="#" class="product-image">
+                        <img src="../resources/img/product-img/product-1.jpg" class="cart-thumb" alt="">
+                        <!-- Cart Item Desc -->
+                        <div class="cart-item-desc">
+                          <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
+                            <span class="badge">Mango</span>
+                            <h6>Button Through Strap Mini Dress</h6>
+                            <p class="size">Size: S</p>
+                            <p class="color">Color: Red</p>
+                            <p class="price">$45.00</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Single Cart Item -->
+                
+
+                <!-- Single Cart Item -->
+            
+            </div>
+
+            <!-- Cart Summary -->
+            <div class="cart-amount-summary">
+
+                <h2>Summary</h2>
+                <ul class="summary-table">
+                    <li><span>subtotal:</span> <span>$274.00</span></li>
+                    <li><span>delivery:</span> <span>Free</span></li>
+                    <li><span>discount:</span> <span>-15%</span></li>
+                    <li><span>total:</span> <span>$232.00</span></li>
+                </ul>
+                <div class="checkout-btn mt-100">
+                    <a href="checkout.html" class="btn essence-btn">check out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Right Side Cart End ##### -->
 
    
 
@@ -126,47 +178,90 @@
 		
             <div class="row">
 
-                <div class="col-12 col-md-6">
-                    <div class="checkout_details_area mt-50 clearfix">
+                
 
                         <div class="cart-page-heading mb-30">
-                            <h5>Billing Address</h5>
+                            <h5>Edit Profile</h5>
                         </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="first_name">First Name</label>
-                                    <input type="text" class="form-control" name="firstName" id="firstName" value="" disabled>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="last_name">Last Name</label>
-                                    <input type="text" class="form-control" name="lastName" id="lastName" value="" disabled>
-                                </div>
-                                <div class="col-12 mb-3">
-                                    <label for="street_address">Address</label>
-                                    <input type="text" class="form-control mb-3" name="addressLine1" id="addressLine1" value="" disabled>
-                                    <input type="text" class="form-control mb-3" name="addressLine2" id="addressLine2" value="" disabled>
-									<input type="text" class="form-control mb-3" name="city" id="city" value="" disabled>
-									<input type="text" class="form-control mb-3" name="state" id="state" value="" disabled>
-									<input type="text" class="form-control mb-3" name="country" id="country" value="" disabled>
-									<input type="text" class="form-control mb-3" name="pincode" id="pincode" value="" disabled>
-                                </div>
-                                <div class="col-12 mb-3">
-                                    <label for="phone_number">Mobile Number</label>
-                                    <input type="number" class="form-control" id="phone_number" min="0" value="" disabled>
-                                </div>
-                                <div class="col-12 mb-4">
-                                    <label for="email_address">Email Address</label>
-                                    <input type="email" class="form-control" id="email_address" value="" disabled>
-                                </div>
-                            </div>
-                    </div>
-                </div>
+                           
+									
+				<div class="col-md-6">
+					<form name="customerUpdate" class="form-horizontal" action="#" onsubmit="return checkForm(this);" method="GET">
+					  <div class="box-body">
+					  <div class="form-group">
+						  <label for="merchantName" class="col-sm-6 control-label">Name</label>
+						  <div class="col-sm-10">
+							<input type="text" class="form-control" name="merchantName" placeholder="Enter Your Name" required>
+						  </div>
+						</div>
+						<div class="form-group">
+						  <label for="merchantEmail" class="col-sm-6 control-label">Email ID</label>
 
-                <div class="col-12 col-md-6 col-lg-5 ml-lg-auto">
+						  <div class="col-sm-10">
+							<input type="email" class="form-control" name="merchantEmail" placeholder="Enter Your Email" required>
+						  </div>
+						</div>
+						<div class="form-group">
+						  <label for="mobileNo" class="col-sm-6 control-label">Mobile Number</label>
+
+						  <div class="col-sm-10">
+							<input type="text" class="form-control" name="mobileNo" pattern="^\d{10}$" placeholder="Enter Your Mobile Number" required>
+						  </div>
+						</div>
+						
+						  
+					 <div class="form-group">
+						  <label for="addressLine1" class="col-sm-6 control-label">Address Line 1</label>
+						  <div class="col-sm-10">
+							<input type="text" class="form-control" name="addressLine1" placeholder="Enter Your Address" required>
+						  </div>
+					</div>
+					<div class="form-group">
+					  <label for="addressLine2" class="col-sm-6 control-label">Address Line 2</label>
+					  <div class="col-sm-10">
+						<input type="text" class="form-control" name="addressLine2" placeholder="Enter Your Address" required>
+					  </div>
+					</div>
+					<div class="form-group">
+					  <label for="city" class="col-sm-6 control-label">City</label>
+					  <div class="col-sm-10">
+						<input type="text" class="form-control" name="city" placeholder="Enter Your City" required>
+					  </div>
+						</div>
+						<div class="form-group">
+						  <label for="state" class="col-sm-6 control-label">State</label>
+						  <div class="col-sm-10">
+							<input type="text" class="form-control" name="state" placeholder="Enter Your State" required>
+						  </div>
+						</div>
+						<div class="form-group">
+						  <label for="country" class="col-sm-6 control-label">Country</label>
+						  <div class="col-sm-10">
+							<input type="text" class="form-control" name="country" placeholder="Enter Your Country" required>
+						  </div>
+						</div>
+						<div class="form-group">
+						  <label for="pincode" class="col-sm-6 control-label">Pin Code</label>
+						  <div class="col-sm-10">
+							<input type="text" class="form-control" name="pincode" pattern="^[1-9][0-9]{5}$" placeholder="Enter Your Pin Code" required>
+						  </div>
+						</div>
+					 </div> 
+					  <div id="RegisterBtn" class="box-footer">
+						<button type="submit" class="col-sm-10 btn essence-btn">Update Profile</button>
+					  </div>
+					  </form>
+			
+				</div>
+										
+											
+								   
+
+                <div class="col-md-6">
                     <div class="order-details-confirmation">
 
                         <div class="cart-page-heading">
-                            <h5>YOUR ORDER</h5>
+                            <h5>YOUR ORDERS</h5>
                             <p>THE DETAILS</p>
                         </div>
 
@@ -175,38 +270,8 @@
                             <li><span>${product.productName}</span> <span>Rs.${product.productPrice}</span></li>
                             <li><span>Quantity</span> <span>${product.productQuantity}</span></li>
                             <li><span>Shipping</span> <span>Free</span></li>
-                            <li><span>Total</span> <span><c:out value="${product.productPrice}*${product.productQuantity}"></c:out></span></li>
+                            <li><span>Total</span> <span><c:out value = "${product.productPrice}*${product.productQuantity}"/></span></li>
                         </ul>
-
-                        <div id="accordion" role="tablist" class="mb-4">
-                            </div>
-                            <div class="card">
-                                <div class="card-header" role="tab" id="headingThree">
-                                    <h6 class="mb-0">
-                                        <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><i class="fa fa-circle-o mr-3"></i>CASH</a>
-                                    </h6>
-                                </div>
-                                <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
-                                    <div class="card-body">
-                                       
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header" role="tab" id="headingFour">
-                                    <h6 class="mb-0">
-                                        <a class="collapsed" data-toggle="collapse" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour"><i class="fa fa-circle-o mr-3"></i>NET BANKING</a>
-                                    </h6>
-                                </div>
-                                <div id="collapseFour" class="collapse show" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
-                                    <div class="card-body">
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <a href="placeOrder" class="btn essence-btn">Place Order</a>
                     </div>
                 </div>
             </div>
