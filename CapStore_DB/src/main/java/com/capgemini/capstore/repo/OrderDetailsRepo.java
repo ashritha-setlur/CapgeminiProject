@@ -17,6 +17,7 @@ import com.capgemini.capstore.beans.Transaction;
 
 public interface OrderDetailsRepo extends JpaRepository<OrderDetails, Integer>, CrudRepository<OrderDetails, Integer> {
 
+	
 	@Query("select c from Customer c where c.id=?1")
 	public Customer findCustomerByCustomerId(int customerId);
 	@Query("select p from Product p where p.productId=?1")

@@ -28,6 +28,7 @@ public class AdminActionController {
 
 	//Method to add Merchant
 
+	
 	@RequestMapping(value="/addMerchant", method=RequestMethod.POST)
 	public void addMerchant(@RequestBody Merchant merchant) {
 		adminServices.addMerchant(merchant);	
