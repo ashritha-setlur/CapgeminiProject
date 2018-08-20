@@ -13,10 +13,10 @@ import com.capgemini.capstore.beans.Merchant;
 @Repository
 public interface MerchantRepo extends JpaRepository<Merchant, Integer>, CrudRepository<Merchant, Integer> {
 
-	@Query("select m from Merchant m where m.merchantId in (select a.authId from Authentication a where a.userAccess='USER_THIRDPARTYMERCHANT' and a.verification='2')")
+	@Query("select m.merchantId,m.merchantName,m.merchantEmail,m.mobileNo,m.merchantAddress,m.merchantRevPercent,m.dateOfReg,m.merchantRevenue from Merchant m where m.merchantId in (select a.authId from Authentication a where a.userAccess='USER_THIRDPARTYMERCHANT' and a.verification='2')")
 	List<Merchant> getThirdPartyMerchant();
 
-	@Query("select m from Merchant m where m.merchantId in (select a.authId from Authentication a where a.userAccess='USER_THIRDPARTYMERCHANT' and a.verification='1')")
+	@Query("select m.merchantId,m.merchantName,m.merchantEmail,m.mobileNo,m.merchantAddress,m.merchantRevPercent,m.dateOfReg,m.merchantRevenue from Merchant m where m.merchantId in (select a.authId from Authentication a where a.userAccess='USER_THIRDPARTYMERCHANT' and a.verification='1')")
 	List<Merchant> getRequestedThirdPartyMerchant();
 	
 	@Query("select m from Merchant m where m.mobileNo =:mobile")

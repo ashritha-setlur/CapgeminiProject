@@ -7,15 +7,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Merchant;
 import com.capgemini.capstore.beans.Product;
 import com.capgemini.capstore.services.AdminServices;
 
+@Controller
+@RestController
 public class AdminActionController {
 
 	public static int id;
