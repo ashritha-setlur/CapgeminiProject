@@ -40,8 +40,8 @@ public class LoginController {
 
 		// After customer login successfully.
 		String userName = principal.getName(); 
-		System.out.println("User Name: " + userName);        
-		return "userInfoPage";
+//		System.out.println("User Name: " + userName);        
+		return userName;
 	}
 
 	@RequestMapping(value = "/merchantInfo", method = RequestMethod.GET)
@@ -49,8 +49,8 @@ public class LoginController {
 
 		// After merchant login successfully.
 		String userName = principal.getName(); 
-		System.out.println("User Name: " + userName);        
-		return "merchantInfoPage";
+//		System.out.println("User Name: " + userName);        
+		return userName;
 	}
 
 	@RequestMapping(value = "/403", method = RequestMethod.GET)

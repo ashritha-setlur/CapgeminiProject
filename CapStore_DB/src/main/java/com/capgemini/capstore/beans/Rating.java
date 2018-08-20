@@ -17,7 +17,7 @@ public class Rating {
 	private int ratingId;
 	@OneToOne(cascade=CascadeType.ALL)
 	private Product product;
-	private double rating;
+	private double ratingValue;
 	@OneToOne(cascade=CascadeType.ALL)
 	private Customer customer;
 	//Constructors
@@ -27,13 +27,12 @@ public class Rating {
 	}
 	public Rating() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Rating(int ratingId, Product product, double rating, Customer customer) {
 		super();
 		this.ratingId = ratingId;
 		this.product = product;
-		this.rating = rating;
+		this.ratingValue = rating;
 		this.customer = customer;
 	}
 
@@ -51,10 +50,10 @@ public class Rating {
 		this.product = product;
 	}
 	public double getRating() {
-		return rating;
+		return ratingValue;
 	}
 	public void setRating(double rating) {
-		this.rating = rating;
+		this.ratingValue = rating;
 	}
 	public Customer getCustomer() {
 		return customer;

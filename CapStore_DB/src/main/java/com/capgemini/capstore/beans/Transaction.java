@@ -35,7 +35,6 @@ public class Transaction {
 	}
 	public Transaction() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	//Getters and Setters

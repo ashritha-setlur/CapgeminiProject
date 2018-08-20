@@ -21,7 +21,6 @@ public class Authentication {
 	//Constructor
 	public Authentication() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Authentication(String mobileNo, String password, String userAccess, int verification) {
 		super();

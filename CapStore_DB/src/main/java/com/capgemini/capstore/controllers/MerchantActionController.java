@@ -22,17 +22,14 @@ public class MerchantActionController {
 
 	//Register Merchant
 	@RequestMapping(method=RequestMethod.POST,value={"/merchantRegister"},produces={"application/text"})
-	public String registerAction(@RequestBody String json) throws JSONException {
+	public void registerAction(@RequestBody String json) throws JSONException {
 		JSONObject jSon=new JSONObject(json);
 		Merchant merchantObj=new Merchant();
 		merchantObj.setMerchantName(jSon.getString("firstName"));
 		merchantObj.setMerchantEmail(jSon.getString("lastName"));
 		merchantObj.setMobileNo(jSon.getString("mobileNo"));
 		long pinCode=jSon.getInt("pincode");
-
 		merchantObj.setMerchantAddress(new Address(jSon.getString("addressline1"),jSon.getString("addressline2"),jSon.getString("city"),jSon.getString("state"),pinCode,jSon.getString("country")));
 		merchantObj=merchantService.registerMerchant(merchantObj,jSon.getString("password"),jSon.getString("type"));
-
-		return "success";
 	}
 }

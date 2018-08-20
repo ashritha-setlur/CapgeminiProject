@@ -35,21 +35,6 @@ public class Merchant {
 		super();
 		this.merchantId = merchantId;
 	}
-	public Merchant(int merchantId, String merchantName, String merchantEmail, String mobileNo, Address merchantAddress,
-			Inventory merchantInventory, double merchantRevPercent, Date dateOfReg, Date dateOfDel, 	double merchantRevenue) {
-		super();
-		this.merchantId = merchantId;
-		this.merchantName = merchantName;
-		this.merchantEmail = merchantEmail;
-		this.mobileNo = mobileNo;
-		this.merchantAddress = merchantAddress;
-		this.merchantInventory = merchantInventory;
-		this.merchantRevPercent = merchantRevPercent;
-		this.dateOfReg = dateOfReg;
-		this.dateOfDel = dateOfDel;
-
-		this.merchantRevenue = merchantRevenue;
-	}
 	public Merchant() {
 		super();
 	}

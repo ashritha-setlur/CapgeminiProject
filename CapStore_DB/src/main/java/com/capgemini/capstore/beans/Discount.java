@@ -19,7 +19,6 @@ public class Discount {
 	//Constructors
 	public Discount() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Discount(int discountId) {

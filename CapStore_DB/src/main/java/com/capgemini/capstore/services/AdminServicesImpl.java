@@ -26,8 +26,8 @@ import com.capgemini.capstore.repo.RatingRepo;
 @Component(value="adminService")
 public class AdminServicesImpl implements AdminServices {
 
-	Map<Integer,Double> merchant_Avg_list = new HashMap<Integer, Double>();
-	Map<Integer,Double> product_Avg_list = new HashMap<Integer, Double>();
+	Map<Integer,Double> merchant_Avg_list = new HashMap<>();
+	Map<Integer,Double> product_Avg_list = new HashMap<>();
 
 	@Autowired
 	private CustomerRepo customerRepo;
@@ -118,8 +118,7 @@ public class AdminServicesImpl implements AdminServices {
 	@Override
 	public double setAvgRatingOfMerchant(int mId) {
 		List<Product> id = ratingRepo.getProductListforMerchant(mId);
-		System.out.println("List ids are:"+id);
-		List<Integer> product_id_list = new ArrayList<Integer>();
+		List<Integer> product_id_list = new ArrayList<>();
 		Iterator<Product> it = id.iterator();
 		while(it.hasNext()) {
 			int i=it.next().getProductId();
@@ -150,7 +149,7 @@ public class AdminServicesImpl implements AdminServices {
 	//Returns a list which contains average rating of all the products of a merchant
 	public Map<Integer, Double> AvgOfProducts_List(int mId) {
 		List<Product> id = ratingRepo.getProductListforMerchant(mId);
-		List<Integer> product_id_list = new ArrayList<Integer>();
+		List<Integer> product_id_list = new ArrayList<>();
 		Iterator<Product> it = id.iterator();
 		while(it.hasNext()) {
 			int i=it.next().getProductId();

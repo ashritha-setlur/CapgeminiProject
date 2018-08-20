@@ -27,7 +27,6 @@ public class Category {
 	//Constructors
 	public Category() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Category(int categoryId) {

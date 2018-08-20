@@ -27,16 +27,13 @@ public class LoginServicesImpl implements UserDetailsService {
 		Authentication authenticate = this.loginRepo.findUserAccount(mobile_no);
 
 		if (authenticate == null) {
-			System.out.println("User not found! " + mobile_no);
 			throw new UsernameNotFoundException("User " + mobile_no + " was not found in the database");
 		}
-
-		System.out.println("Found User: " +authenticate);
 
 		// [ROLE_USER, ROLE_ADMIN,..]
 		List<String> roleNames = this.loginRepo.getRoleNames(authenticate.getMobileNo());
 
-		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
+		List<GrantedAuthority> grantList = new ArrayList<>();
 		if (roleNames != null) {
 			for (String role : roleNames) {
 				// ROLE_USER, ROLE_ADMIN,..

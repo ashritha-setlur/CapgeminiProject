@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -14,7 +16,8 @@ import javax.persistence.Table;
 public class OrderDetails {
 
 	@Id
-	private int orderId;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int orderId = 100;
 	@OneToOne(cascade=CascadeType.ALL)
 	private Product product;
 	@OneToOne(cascade=CascadeType.ALL)
@@ -36,22 +39,8 @@ public class OrderDetails {
 	}
 	public OrderDetails() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public OrderDetails(int orderId, Product product, Customer customer, Transaction transaction,
-			Date deliveryDate, Date orderDate, String deliveryStatus, Promo promo, double orderAmount) {
-		super();
-		this.orderId = orderId;
-		this.product = product;
-		this.customer = customer;
-		this.transaction = transaction;
-		this.deliveryDate = deliveryDate;
-		this.orderDate = orderDate;
-		this.deliveryStatus = deliveryStatus;
-		this.promo = promo;
-		this.orderAmount = orderAmount;
-	}
-
+	
 	//Getters and Setters
 	public int getOrderId() {
 		return orderId;

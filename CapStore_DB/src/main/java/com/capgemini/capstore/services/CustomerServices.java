@@ -1,6 +1,5 @@
 package com.capgemini.capstore.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.capgemini.capstore.beans.Authentication;
@@ -35,8 +34,8 @@ public interface CustomerServices {
 	public boolean placeOrder(int custId,int cartId,int prodId) ;
 	public Rating addRating(Rating rating);
 	public Customer registerCustomer(Customer customer, Authentication passwrd);
-	public ArrayList<Product> searchByProductBrand(String product);
-	public ArrayList<Product> searchByProductName(String product);
+	public List<Product> searchByProductBrand(String product);
+	public List<Product> searchByProductName(String product);
 	public Customer retrieveShipmentDetails(int customerId);
 	public void applyCoupon( int orderid,String promoName);
 	public Cart applyDiscount(int cartId);

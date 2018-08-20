@@ -35,29 +35,11 @@ public class Customer {
 	//Constructors
 	public Customer() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Customer(int id) {
 		super();
 		this.id = id;
-	}
-
-	public Customer(int id, String mobileNo, String firstName, String lastName, String email, String gender,
-			Date dateOfBirth, Date dateOfReg, Date dateOfDel, Address address, Cart cart, Wishlist wishlist) {
-		super();
-		this.id = id;
-		this.mobileNo = mobileNo;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.gender = gender;
-		this.dateOfBirth = dateOfBirth;
-		this.dateOfReg = dateOfReg;
-		this.dateOfDel = dateOfDel;
-		this.address = address;
-		this.cart = cart;
-		this.wishlist = wishlist;
 	}
 
 	//Getters and Setters

@@ -2,11 +2,11 @@ package com.capgemini.capstore.services;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.capgemini.capstore.beans.Authentication;
@@ -63,8 +63,6 @@ public class CustomerServicesImpl implements CustomerServices {
 
 	@Autowired
 	private TransactionRepo transactionRepo;
-
-	private static int orderId=100;
 
 	@Override
 	public Feedback addFeedback(Feedback feedBack) {
@@ -131,7 +129,6 @@ public class CustomerServicesImpl implements CustomerServices {
 		@SuppressWarnings("unused")
 		Transaction trans=orderDetailsRepo.findtransactionBytransactionId(transactionId);
 		OrderDetails order=new OrderDetails();
-		order.setOrderId(orderId++);
 		order.setCustomer(customer);
 		order.setProduct(product);
 		order.setDeliveryStatus("confirmed");
@@ -142,7 +139,7 @@ public class CustomerServicesImpl implements CustomerServices {
 		java.sql.Date deliveryDate = this.addDays(orderDate, 5);
 		order.setDeliveryDate(deliveryDate);
 		orderDetailsRepo.save(order);
-		return orderId++;	
+		return order.getOrderId();	
 	}
 
 	private Date addDays(Date orderDate, int days) {
@@ -182,16 +179,11 @@ public class CustomerServicesImpl implements CustomerServices {
 	@Override
 	public List<Product> getProductInRange(String searchedItem) {
 		List<Product> result = productRepo.getProductsWithinRange(searchedItem);
-		if(result==null)
-		{
-			System.out.println("products are unavaliable between the price 100 and 1000");
-		}
 		return result;
-		//return dao.getProductsWithinRange(searchedItem);
 	}
+
 	@Override
 	public List<Product> getProductAscPrice(String searchedItem) {
-
 		return productRepo.getProductAscPrice(searchedItem);
 	}
 	@Override
@@ -201,12 +193,10 @@ public class CustomerServicesImpl implements CustomerServices {
 	}
 	@Override
 	public List<Product> getProductMostViewd(String searchedItem) {
-
 		return productRepo.getProductMostlyViewed(searchedItem);
 	}
 	@Override
 	public List<Product> getProductRating(String searchedItem) {
-
 		return productRepo.getBestProducts(searchedItem);
 	}
 
@@ -216,18 +206,15 @@ public class CustomerServicesImpl implements CustomerServices {
 			OrderDetails order1 =orderDetailsRepo.findOrderByOrderId(orderId);
 			order1.setDeliveryStatus("Delivered");
 			orderDetailsRepo.save(order1);
-			System.out.println("delivered");
 		}
 		else if(num==2){
 			OrderDetails order1 =orderDetailsRepo.findOrderByOrderId(orderId);
 			order1.setDeliveryStatus("Returned");
 			orderDetailsRepo.save(order1);
-			System.out.println("returned");
 		}
 	}
 	@Override
 	public boolean placeOrder(int custId, int cartId, int prodId) {
-
 		Customer customer=customerRepo.getOne(custId);
 		Cart cart= cartRepo.getOne(customer.getCart().getCartId());
 		Product product=productRepo.getOne(prodId);
@@ -245,13 +232,12 @@ public class CustomerServicesImpl implements CustomerServices {
 	}
 	@Override
 	public Customer registerCustomer(Customer customer,Authentication passwrd) {
-
 		Customer customer1;
 		addCart(customer.getId());
 		customerRepo.save(customer);
 		customer1=customerRepo.getCustomerId(customer.getMobileNo());
-		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		String password=passwrd.getPassword();
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String password=encoder.encode(passwrd.getPassword());   
 		Authentication auth=new Authentication(customer1.getId(),customer1.getMobileNo(),password,"USER_CUSTOMER",2);
 		aRepo.save(auth);
 		return customer;
@@ -259,21 +245,16 @@ public class CustomerServicesImpl implements CustomerServices {
 
 	//Searching product by Brand
 	@Override
-	public ArrayList<Product> searchByProductBrand(String product) {
-		ArrayList<Product> product1=new ArrayList<Product>();
-		product1=productRepo.findProductBrand(product);
-		if(product1==null)
-		{
-			product1=searchByProductName(product);
-		}
+	public List<Product> searchByProductBrand(String product) {
+		List<Product> product1=productRepo.findProductBrand(product);
+		product1=searchByProductName(product);
 		return product1;
 	}
 
 	//Searching product by Name
 	@Override
-	public ArrayList<Product> searchByProductName(String product)  {
-		ArrayList<Product> product1=new ArrayList<Product>();
-		product1=productRepo.findProductName(product);
+	public List<Product> searchByProductName(String product)  {
+		List<Product> product1=productRepo.findProductName(product);
 		return product1;
 	}
 	@Override
@@ -300,7 +281,6 @@ public class CustomerServicesImpl implements CustomerServices {
 	@Override
 	public Cart applyDiscount(int cartId) {
 		Cart cartProducts= cartRepo.findByCartId(cartId);
-		System.out.println(cartProducts);
 		List<Product> productlist= cartProducts.getProducts();
 		for(Product product:productlist)
 		{
