@@ -1,6 +1,5 @@
 package com.capgemini.capstore.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
@@ -102,10 +101,9 @@ public class CustomerActionController {
 
 	//Search for Products(by product name,product brand)
 	@RequestMapping(method=RequestMethod.POST, value={"/searchAction"},produces=MediaType.APPLICATION_JSON_VALUE)
-	public ArrayList<Product> search(@RequestBody String jSon) throws JSONException{
+	public List<Product> search(@RequestBody String jSon) throws JSONException{
 		JSONObject json=new JSONObject(jSon);
-		ArrayList<Product> productObj=new ArrayList<Product>(); 
-		productObj=customerServices.searchByProductBrand(json.getString("key"));
+		List<Product> productObj = customerServices.searchByProductBrand(json.getString("key"));
 		return productObj;
 	}
 

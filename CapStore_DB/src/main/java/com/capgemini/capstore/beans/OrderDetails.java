@@ -39,22 +39,8 @@ public class OrderDetails {
 	}
 	public OrderDetails() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public OrderDetails(int orderId, Product product, Customer customer, Transaction transaction,
-			Date deliveryDate, Date orderDate, String deliveryStatus, Promo promo, double orderAmount) {
-		super();
-		this.orderId = orderId;
-		this.product = product;
-		this.customer = customer;
-		this.transaction = transaction;
-		this.deliveryDate = deliveryDate;
-		this.orderDate = orderDate;
-		this.deliveryStatus = deliveryStatus;
-		this.promo = promo;
-		this.orderAmount = orderAmount;
-	}
-
+	
 	//Getters and Setters
 	public int getOrderId() {
 		return orderId;

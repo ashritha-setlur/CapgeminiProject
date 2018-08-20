@@ -41,29 +41,6 @@ public class Product {
 	//Constructors
 	public Product() {
 		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Product(int productId, String productName, String productDesc, int productSize, int productQuantity,
-			Rating productRating, Merchant productMerchant, Date productAddDate, Date productDelDate,
-			Category productCategory, double productPrice, int productViews, Image productImage,
-			Discount productDiscount, String productBrand) {
-		super();
-		this.productId = productId;
-		this.productName = productName;
-		this.productDesc = productDesc;
-		this.productSize = productSize;
-		this.productQuantity = productQuantity;
-		this.productRating = productRating;
-		this.productMerchant = productMerchant;
-		this.productAddDate = productAddDate;
-		this.productDelDate = productDelDate;
-		this.productCategory = productCategory;
-		this.productPrice = productPrice;
-		this.productViews = productViews;
-		this.productImage = productImage;
-		this.productDiscount = productDiscount;
-		this.productBrand = productBrand;
 	}
 
 	public Product(int productId) {

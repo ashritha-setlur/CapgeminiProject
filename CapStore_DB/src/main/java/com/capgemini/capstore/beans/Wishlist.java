@@ -23,7 +23,6 @@ public class Wishlist {
 	//Constructors
 	public Wishlist() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	//Getters and Setters

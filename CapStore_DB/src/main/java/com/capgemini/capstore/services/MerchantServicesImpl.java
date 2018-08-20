@@ -34,9 +34,8 @@ public class MerchantServicesImpl implements MerchantServices {
 		merchantRepo.save(merchant);
 
 		merchant1=merchantRepo.getMerchantId(merchant.getMobileNo());
-		@SuppressWarnings("unused")
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		Authentication auth=new Authentication(merchant1.getMerchantId(),merchant1.getMobileNo(),password,"USER_MERCHANT",2);
+		Authentication auth=new Authentication(merchant1.getMerchantId(),merchant1.getMobileNo(),encoder.encode(password),"USER_MERCHANT",2);
 		if(type.equals("direct"))
 			auth.setUserAccess("USER_DIRECTMERCHANT");
 		else

@@ -1,6 +1,5 @@
 package com.capgemini.capstore.repo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -31,7 +30,7 @@ public interface ProductRepo extends JpaRepository<Product, Integer>, CrudReposi
 	@Query("select cart.products from Cart cart where cart.products=?1")
 	public Product getOneProduct(Product product);
 	@Query("select p from Product p where p.productName LIKE %:key%")
-	public ArrayList<Product> findProductName(@Param(value="key") String key);
+	public List<Product> findProductName(@Param(value="key") String key);
 	@Query("select p from Product p where p.productBrand LIKE %:key%")
-	public ArrayList<Product> findProductBrand(@Param(value="key") String key);
+	public List<Product> findProductBrand(@Param(value="key") String key);
 }

@@ -19,7 +19,6 @@ public class PaymentMethod {
 	//Constructors
 	public PaymentMethod() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public PaymentMethod(int id, int cash, int netbanking) {
 		super();

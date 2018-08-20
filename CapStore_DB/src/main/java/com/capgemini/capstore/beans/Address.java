@@ -11,7 +11,7 @@ public class Address {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	int address_id;
+	int addressId;
 
 	private String addressLine1;
 	private String addressLine2;
@@ -23,13 +23,12 @@ public class Address {
 	//Constructors
 	public Address() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Address(int address_id, String addressLine1, String addressLine2, String city, String state, long pincode,
+	public Address(int addressId, String addressLine1, String addressLine2, String city, String state, long pincode,
 			String country) {
 		super();
-		this.address_id = address_id;
+		this.addressId = addressId;
 		this.addressLine1 = addressLine1;
 		this.addressLine2 = addressLine2;
 		this.city = city;
