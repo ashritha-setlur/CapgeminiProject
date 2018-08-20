@@ -90,6 +90,7 @@ public class AdminActionController {
 		adminServices.deleteThirdPartyMerchant(merchantId);
 		return adminServices.viewThirdPartyMerchant();
 	}
+	
 }
 
 

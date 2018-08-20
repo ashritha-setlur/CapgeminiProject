@@ -165,9 +165,10 @@ public class CustomerActionController {
 		productObj=customerServices.searchByProductBrand(json.getString("key"));
 		return productObj;
 	}
-	
+
 	@RequestMapping(value="/getShipmentDetails")
 	public Customer getDetails(int customerId) {		
 		return customerServices.retrieveShipmentDetails(customerId);		 
 	}
+
 }

@@ -37,6 +37,9 @@ public class AdminServicesImpl implements AdminServices {
 	private AuthenticationRepo aRepo;
 	@Autowired
 	private RatingRepo ratingRepo;
+//	@Autowired
+//	private OrderDetailsRepo orderDetailsRepo;
+//	
 
 
 	//Method to add Merchant Details
@@ -137,7 +140,6 @@ public class AdminServicesImpl implements AdminServices {
 	}
 
 	//Returns a list which contains average rating of all the products of a merchant
-	@Override
 	public Map<Integer, Double> AvgOfProducts_List(int mId) {
 		List<Product> id = ratingRepo.getProductListforMerchant(mId);
 		List<Integer> product_id_list = new ArrayList<Integer>();
