@@ -123,27 +123,30 @@ public class CustomerServicesImpl implements CustomerServices {
 	}
 
 
-
-	public int generateInvoice(int customerId, int productId, int orderAmount,int transactionId)
-	{
-		Product product=orderDetailsRepo.findProductByProductId(productId);
-		Customer customer=orderDetailsRepo.findCustomerByCustomerId(customerId);
-		@SuppressWarnings("unused")
-		Transaction trans=orderDetailsRepo.findtransactionBytransactionId(transactionId);
-		OrderDetails order=new OrderDetails();
-		order.setOrderId(orderId++);
-		order.setCustomer(customer);
-		order.setProduct(product);
-		order.setDeliveryStatus("confirmed");
-		@SuppressWarnings("unused")
-		long millis=System.currentTimeMillis();
-		java.sql.Date orderDate = new java.sql.Date(new java.util.Date().getTime());
-		order.setDeliveryDate(orderDate);
-		java.sql.Date deliveryDate = this.addDays(orderDate, 5);
-		order.setDeliveryDate(deliveryDate);
-		orderDetailsRepo.save(order);
-		return orderId++;	
-	}
+	//returns invoice number and saves all the order_details information
+		public int generateInvoice(int customerId, int productId, int orderAmount,int transactionId,int promoId)
+		{
+		
+			Product product=orderDetailsRepo.findProductByProductId(productId);
+			Customer customer=orderDetailsRepo.findCustomerByCustomerId(customerId);
+			Transaction transaction=orderDetailsRepo.findtransactionBytransactionId(transactionId);
+			OrderDetails order=new OrderDetails();
+			Promo promo=promoRepo.getOne(promoId);
+			order.setCustomer(customer);
+			order.setProduct(product);
+			order.setTransaction(transaction);
+			order.setDeliveryStatus("confirmed");
+			order.setOrderAmount(orderAmount);
+			order.setPromo(promo);
+			java.sql.Date orderDate = new java.sql.Date(new java.util.Date().getTime());
+			order.setOrderDate(orderDate);
+			java.sql.Date deliveryDate = this.addDays(orderDate, 5);
+			order.setDeliveryDate(deliveryDate);
+			order.setOrderAmount(orderAmount);
+			orderDetailsRepo.save(order);
+			int orderId=order.getOrderId();
+			return orderId;	
+		}
 
 	private Date addDays(Date orderDate, int days) {
 		Calendar c = Calendar.getInstance();

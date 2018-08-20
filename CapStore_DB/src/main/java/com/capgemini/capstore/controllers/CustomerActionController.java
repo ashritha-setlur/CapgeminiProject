@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -120,6 +121,20 @@ public class CustomerActionController {
 		customerServices.applyCoupon(orderId,promo);
 	}
 
+	
+	
+	//controller to test through postman to generate invoice
+	@RequestMapping(value="/getInvoice", method=RequestMethod.GET)
+	public int getInvoice(int customerId,int productId, int orderAmount,int transactionId,int promoId) {
+		return customerServices.generateInvoice(customerId, productId, orderAmount,transactionId,promoId);	
+	}
+	
+	//controller to call generate invoice
+	@RequestMapping(value="/getInvoice/{customerId,productId,orderAmount,transactionId}", method=RequestMethod.GET)
+	public int generateInvoice(@Param("customerId") int customerId, @Param("productId")int productId, @Param("orderAmount") int orderAmount,@Param("promoId")int transactionId,@Param("transactionId")int promoId) {
+		return customerServices.generateInvoice(customerId, productId, orderAmount,transactionId,promoId);	
+	}
+	
 	@RequestMapping(value="/applydiscount", method=RequestMethod.GET)
 	public Cart applydiscount(int cartId){
 		return customerServices.applyDiscount(cartId);
