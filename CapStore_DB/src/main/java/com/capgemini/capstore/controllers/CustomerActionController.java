@@ -19,6 +19,7 @@ import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Feedback;
 import com.capgemini.capstore.beans.OrderDetails;
 import com.capgemini.capstore.beans.Product;
+import com.capgemini.capstore.beans.Rating;
 import com.capgemini.capstore.beans.Wishlist;
 import com.capgemini.capstore.services.CustomerServices;
 
@@ -169,6 +170,15 @@ public class CustomerActionController {
 	@RequestMapping(value="/getShipmentDetails")
 	public Customer getDetails(int customerId) {		
 		return customerServices.retrieveShipmentDetails(customerId);		 
+	}
+	
+	//Add Rating to a product
+	@RequestMapping(value="/addRating",method=RequestMethod.POST)
+	public Rating addRating(@RequestBody Rating rating)
+	{
+		Rating rate=customerServices.addRating(rating);
+		return rate;
+
 	}
 
 }
