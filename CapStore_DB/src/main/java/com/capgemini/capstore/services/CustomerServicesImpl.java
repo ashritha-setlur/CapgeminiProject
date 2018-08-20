@@ -242,6 +242,7 @@ public class CustomerServicesImpl implements CustomerServices {
 	public Customer registerCustomer(Customer customer,Authentication passwrd) {
 
 		Customer customer1;
+		addCart(customer.getId());
 		customerRepo.save(customer);
 		customer1=customerRepo.getCustomerId(customer.getMobileNo());
 		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
