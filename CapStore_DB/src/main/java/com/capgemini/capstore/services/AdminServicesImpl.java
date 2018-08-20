@@ -59,19 +59,22 @@ public class AdminServicesImpl implements AdminServices {
 	//Method to display the customer details
 	@Override
 	public  List<Customer> displayAllCustomers() {
-		return customerRepo.findAll();	
+		List<Customer> cust = customerRepo.getAllCustomers();
+		return cust;
 	}
 
 	//Method to display the Merchant details
 	@Override
 	public List<Merchant> displayAllMerchants() {
-		return merchantRepo.findAll();
+		List<Merchant> merchant = merchantRepo.getAllMerchants();
+		return merchant;
 	}
 
 	//Method to display the product details
 	@Override
 	public List<Product> displayAllProducts() {
-		return productRepo.findAll();
+		List<Product> product = productRepo.getAllProducts();
+		return product;
 	}
 
 	@Override
