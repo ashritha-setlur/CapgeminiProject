@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.capgemini.capstore.beans.Authentication;
 import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Discount;
 import com.capgemini.capstore.beans.Merchant;
@@ -189,5 +190,16 @@ public class AdminServicesImpl implements AdminServices {
 	public void deletePromo(int promoId) {
 		promoRepo.deleteById(promoId);	
 	}
+	@Override
+	public boolean validateMerchant(int merchantId) {
+		Merchant merchant=merchantRepo.getOne(merchantId);
+		
+		Authentication authentication=aRepo.getOne(merchantId);
+		
+		authentication.setVerfication(2);
+		
+		aRepo.save(authentication);
+		
+		return true;
+	}
 }
-

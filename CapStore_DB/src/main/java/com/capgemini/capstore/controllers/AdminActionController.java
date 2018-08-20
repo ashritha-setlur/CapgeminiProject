@@ -90,6 +90,9 @@ public class AdminActionController {
 		adminServices.deleteThirdPartyMerchant(merchantId);
 		return adminServices.viewThirdPartyMerchant();
 	}
+	@RequestMapping(value="/verify", method=RequestMethod.GET)
+	public boolean changeVerification(int merchantId)
+	{
+		return adminServices.validateMerchant(merchantId);
+	}
 }
-
-
