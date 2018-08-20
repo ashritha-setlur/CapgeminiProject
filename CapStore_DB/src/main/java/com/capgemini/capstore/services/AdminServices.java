@@ -31,5 +31,6 @@ public interface AdminServices {
 	public int addPromo(Promo promo);
 	public List<Promo> displayAllPromos();
 	public void deletePromo(int promoId);
+	public boolean updateCapRevenue(double amount, int productId);
 
 }
