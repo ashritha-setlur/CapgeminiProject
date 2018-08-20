@@ -65,19 +65,19 @@ public class CapStoreAdminServicesImplementation implements CapStoreAdminService
 	
 	@Override
 	public  List<Customer> displayAllCustomers() {
-
-		return customerRepo.findAll();
+		List<Customer> cust = customerRepo.getAllCustomers();
+		return cust;
 	}
 
 	@Override
 	public List<Merchant> displayAllMerchants() {
-
-		return merchantRepo.findAll();
+		List<Merchant> merchant = merchantRepo.getAllMerchants();
+		return merchant;
 	}
 
 	@Override
 	public List<Product> displayAllProducts() {
-
-		return productRepo.findAll();
+		List<Product> product = productRepo.getAllProducts();
+		return product;
 	}
 }
