@@ -11,11 +11,13 @@ import org.springframework.stereotype.Component;
 
 import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Merchant;
+import com.capgemini.capstore.beans.OrderDetails;
 import com.capgemini.capstore.beans.Product;
 import com.capgemini.capstore.repo.AdminRepo;
 import com.capgemini.capstore.repo.AuthenticationRepo;
 import com.capgemini.capstore.repo.CustomerRepo;
 import com.capgemini.capstore.repo.MerchantRepo;
+import com.capgemini.capstore.repo.OrderDetailsRepo;
 import com.capgemini.capstore.repo.ProductRepo;
 import com.capgemini.capstore.repo.RatingRepo;
 
@@ -35,6 +37,8 @@ public class AdminServicesImpl implements AdminServices {
 	private AdminRepo adminRepo;
 	@Autowired
 	private AuthenticationRepo aRepo;
+	@Autowired
+	OrderDetailsRepo orderDetailsRepo;
 	@Autowired
 	private RatingRepo ratingRepo;
 //	@Autowired
@@ -137,6 +141,30 @@ public class AdminServicesImpl implements AdminServices {
 		}
 		Double avgRating = sum / product_rating_list.size();
 		return avgRating;
+	}
+	
+	@Override
+	public OrderDetails returnProduct(int id) {
+		
+		 OrderDetails o=orderDetailsRepo.findByOrderId(id);
+		 
+		 //Get the delivery status & check if it is delivered & update to returned
+		 if(o.getDeliveryStatus().equalsIgnoreCase("DELIVERED"))
+		 {
+			 o.setDeliveryStatus("RETURNED");
+		 
+		 Product returningProducts= o.getProduct();
+		
+		 int qty=returningProducts.getProductQuantity()+1;
+		 returningProducts.setProductQuantity(qty);
+		 	 
+		 orderDetailsRepo.save(o);
+		 return o;
+		 } 
+		 else
+		 {
+			 return o;
+		 }
 	}
 
 	//Returns a list which contains average rating of all the products of a merchant

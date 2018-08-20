@@ -34,4 +34,7 @@ public interface OrderDetailsRepo extends JpaRepository<OrderDetails, Integer>, 
 	@Transactional
 	@Query("update OrderDetails o set o.deliveryStatus='Refunded' where o.orderId=:id")
 	void updateDeliveryStatus(@Param("id")int orderId);
+	@Query("select orderDetails from OrderDetails orderDetails where orderDetails.id=?1")
+	OrderDetails findByOrderId(int id);
+	
 }

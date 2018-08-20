@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Merchant;
+import com.capgemini.capstore.beans.OrderDetails;
 import com.capgemini.capstore.beans.Product;
 import com.capgemini.capstore.services.AdminServices;
 
@@ -108,6 +109,13 @@ public class AdminActionController {
 		JSONObject jSon=new JSONObject(json); 
 		Map<Integer,Double> product_list = adminServices.AvgOfProducts_List(jSon.getInt("mId"));
 		return product_list;
+	}
+	
+	@RequestMapping(value="/returnPurchasedProduct",method=RequestMethod.GET)
+	public OrderDetails getProductReturnDetails(int id) 
+	{
+	
+		return adminServices.returnProduct(id);
 	}
 
 	@RequestMapping(value="/saveAvgMerchantRating", method=RequestMethod.POST)
