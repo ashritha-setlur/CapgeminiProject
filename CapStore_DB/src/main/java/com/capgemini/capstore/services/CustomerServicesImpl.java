@@ -200,19 +200,7 @@ public class CustomerServicesImpl implements CustomerServices {
 		return productRepo.getBestProducts(searchedItem);
 	}
 
-	@Override
-	public void orderStatus(int orderId, int num){
-		if(num==1){
-			OrderDetails order1 =orderDetailsRepo.findOrderByOrderId(orderId);
-			order1.setDeliveryStatus("Delivered");
-			orderDetailsRepo.save(order1);
-		}
-		else if(num==2){
-			OrderDetails order1 =orderDetailsRepo.findOrderByOrderId(orderId);
-			order1.setDeliveryStatus("Returned");
-			orderDetailsRepo.save(order1);
-		}
-	}
+	//After placing the order transaction must occur where is the code for that?
 	@Override
 	public boolean placeOrder(int custId, int cartId, int prodId) {
 		Customer customer=customerRepo.getOne(custId);
@@ -257,12 +245,16 @@ public class CustomerServicesImpl implements CustomerServices {
 		List<Product> product1=productRepo.findProductName(product);
 		return product1;
 	}
+	
+	//Retrieving shipment means going to customer orders and getting the orderId and from there orderStatus 
+	//Where is the mapping???????
 	@Override
 	public Customer retrieveShipmentDetails(int customerId) {
 		//Service layer function which retrieves the details of customer
 		return customerRepo.getShipmentDetails(customerId);		
 	}
 
+	//Only after order is made will the promo be applied
 	@Override
 	public void applyCoupon( int orderid,String promoName) {
 		Promo promo = promoRepo.findByPromoName(promoName);
@@ -278,6 +270,8 @@ public class CustomerServicesImpl implements CustomerServices {
 			}
 		}
 	}
+	
+	//Only after order is made will the discount be applied
 	@Override
 	public Cart applyDiscount(int cartId) {
 		Cart cartProducts= cartRepo.findByCartId(cartId);
@@ -295,9 +289,9 @@ public class CustomerServicesImpl implements CustomerServices {
 		return cartProducts;
 	}
 
+	//Why will I separately call for my transaction to be saved?
 	@Override
-	public int saveTransaction(int paymentMethod)
-	{
+	public int saveTransaction(int paymentMethod){
 		Transaction transaction = new Transaction();
 		java.sql.Date transDate = new java.sql.Date(new java.util.Date().getTime());
 		transaction.setTransDate(transDate);

@@ -32,4 +32,5 @@ public interface AdminServices {
 	public List<Promo> displayAllPromos();
 	public void deletePromo(int promoId);
 	public boolean validateMerchant(int merchantId);
+	public void orderStatus(int orderId, int num);
 }

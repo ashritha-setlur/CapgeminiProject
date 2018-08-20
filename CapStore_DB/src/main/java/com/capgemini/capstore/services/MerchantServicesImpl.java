@@ -9,10 +9,13 @@ import org.springframework.stereotype.Component;
 import com.capgemini.capstore.beans.Authentication;
 import com.capgemini.capstore.beans.Discount;
 import com.capgemini.capstore.beans.Merchant;
+import com.capgemini.capstore.beans.OrderDetails;
+import com.capgemini.capstore.beans.Product;
 import com.capgemini.capstore.beans.Promo;
 import com.capgemini.capstore.repo.AuthenticationRepo;
 import com.capgemini.capstore.repo.DiscountRepo;
 import com.capgemini.capstore.repo.MerchantRepo;
+import com.capgemini.capstore.repo.OrderDetailsRepo;
 import com.capgemini.capstore.repo.PromoRepo;
 
 @Component(value="merchantService")
@@ -26,6 +29,9 @@ public class MerchantServicesImpl implements MerchantServices {
 	private DiscountRepo discountRepo;
 	@Autowired
 	private PromoRepo promoRepo;
+	@Autowired
+	private OrderDetailsRepo orderDetailsRepo;
+
 	@Override
 	//Register Merchant
 	public Merchant registerMerchant(Merchant merchant, String password, String type) {
@@ -70,5 +76,19 @@ public class MerchantServicesImpl implements MerchantServices {
 	@Override
 	public void deletePromo(int promoId) {
 		promoRepo.deleteById(promoId);
+	}
+
+	@Override
+	public OrderDetails deliveringProducts(int orderId) {
+		OrderDetails orderDetails=orderDetailsRepo.deliveringProducts(orderId);
+		if(orderDetails!=null) {
+			Merchant merchant = merchantRepo.getOne(orderDetails.getProduct().getProductMerchant().getMerchantId());
+			List<Product> products = merchant.getMerchantInventory().getProducts();
+			int index = products.indexOf(orderDetails.getProduct());
+			products.get(index).setProductQuantity(products.get(index).getProductQuantity()-1);
+			orderDetails.setDeliveryStatus("Dispatched");
+		}
+		orderDetailsRepo.save(orderDetails);
+		return orderDetails;
 	}
 }

@@ -13,6 +13,7 @@ import com.capgemini.capstore.beans.Authentication;
 import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Discount;
 import com.capgemini.capstore.beans.Merchant;
+import com.capgemini.capstore.beans.OrderDetails;
 import com.capgemini.capstore.beans.Product;
 import com.capgemini.capstore.beans.Promo;
 import com.capgemini.capstore.repo.AdminRepo;
@@ -20,6 +21,7 @@ import com.capgemini.capstore.repo.AuthenticationRepo;
 import com.capgemini.capstore.repo.CustomerRepo;
 import com.capgemini.capstore.repo.DiscountRepo;
 import com.capgemini.capstore.repo.MerchantRepo;
+import com.capgemini.capstore.repo.OrderDetailsRepo;
 import com.capgemini.capstore.repo.ProductRepo;
 import com.capgemini.capstore.repo.PromoRepo;
 import com.capgemini.capstore.repo.RatingRepo;
@@ -42,6 +44,8 @@ public class AdminServicesImpl implements AdminServices {
 	private AuthenticationRepo aRepo;
 	@Autowired
 	private RatingRepo ratingRepo;
+	@Autowired
+	private OrderDetailsRepo orderDetailsRepo;
 	//	@Autowired
 	//	private OrderDetailsRepo orderDetailsRepo;
 
@@ -68,19 +72,22 @@ public class AdminServicesImpl implements AdminServices {
 	//Method to display the customer details
 	@Override
 	public  List<Customer> displayAllCustomers() {
-		return customerRepo.findAll();	
+		List<Customer> customer = customerRepo.getAllCustomers();
+		return customer;
 	}
 
 	//Method to display the Merchant details
 	@Override
 	public List<Merchant> displayAllMerchants() {
-		return merchantRepo.findAll();
+		List<Merchant> merchant = merchantRepo.getAllMerchants();
+		return merchant;
 	}
 
 	//Method to display the product details
 	@Override
 	public List<Product> displayAllProducts() {
-		return productRepo.findAll();
+		List<Product> product = productRepo.getAllProducts();
+		return product;
 	}
 
 	@Override
@@ -196,5 +203,20 @@ public class AdminServicesImpl implements AdminServices {
 		authentication.setVerfication(2);
 		aRepo.save(authentication);
 		return true;
+	}
+
+	//What is num????
+	@Override
+	public void orderStatus(int orderId, int num){
+		if(num==1){
+			OrderDetails order1 =orderDetailsRepo.findOrderByOrderId(orderId);
+			order1.setDeliveryStatus("Delivered");
+			orderDetailsRepo.save(order1);
+		}
+		else if(num==2){
+			OrderDetails order1 =orderDetailsRepo.findOrderByOrderId(orderId);
+			order1.setDeliveryStatus("Returned");
+			orderDetailsRepo.save(order1);
+		}
 	}
 }

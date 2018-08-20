@@ -28,7 +28,6 @@ public interface CustomerServices {
 	public List<Product> getProductDescPrice(String searchedItem);
 	public List<Product> getProductMostViewd(String searchedItem);
 	public List<Product> getProductRating(String searchedItem);
-	public void orderStatus(int orderId, int num);
 	public boolean placeOrder(int custId,int cartId,int prodId) ;
 	public Rating addRating(Rating rating);
 	public Customer registerCustomer(Customer customer, Authentication passwrd);
