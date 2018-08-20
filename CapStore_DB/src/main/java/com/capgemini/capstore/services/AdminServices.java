@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Merchant;
+import com.capgemini.capstore.beans.OrderDetails;
 import com.capgemini.capstore.beans.Product;
 
 public interface AdminServices {
@@ -23,4 +24,7 @@ public interface AdminServices {
 	public double setAvgRatingOfMerchant(int mId);
 	public double setAvgRatingOfProduct(int pId);
 	public Map<Integer,Double> AvgOfProducts_List(int mId);
+	public List<OrderDetails> viewReturnedProduct();	
+	public List<OrderDetails> acceptReturnedProduct(int orderId);
+	
 }

@@ -11,11 +11,13 @@ import org.springframework.stereotype.Component;
 
 import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Merchant;
+import com.capgemini.capstore.beans.OrderDetails;
 import com.capgemini.capstore.beans.Product;
 import com.capgemini.capstore.repo.AdminRepo;
 import com.capgemini.capstore.repo.AuthenticationRepo;
 import com.capgemini.capstore.repo.CustomerRepo;
 import com.capgemini.capstore.repo.MerchantRepo;
+import com.capgemini.capstore.repo.OrderDetailsRepo;
 import com.capgemini.capstore.repo.ProductRepo;
 import com.capgemini.capstore.repo.RatingRepo;
 
@@ -24,7 +26,7 @@ public class AdminServicesImpl implements AdminServices {
 
 	Map<Integer,Double> merchant_Avg_list = new HashMap<Integer, Double>();
 	Map<Integer,Double> product_Avg_list = new HashMap<Integer, Double>();
-
+    
 	@Autowired
 	private CustomerRepo customerRepo;
 	@Autowired
@@ -37,6 +39,8 @@ public class AdminServicesImpl implements AdminServices {
 	private AuthenticationRepo aRepo;
 	@Autowired
 	private RatingRepo ratingRepo;
+	@Autowired
+	private OrderDetailsRepo orderDetailsRepo;
 
 
 	//Method to add Merchant Details
@@ -151,6 +155,24 @@ public class AdminServicesImpl implements AdminServices {
 			product_Avg_list.put(i, avgRating);
 		}
 		return product_Avg_list;
+	}
+	@Override
+	public List<OrderDetails> viewReturnedProduct() {
+		return orderDetailsRepo.viewReturnedProduct();
+
+	}
+
+	@Override
+	public List<OrderDetails> acceptReturnedProduct(int orderId) {
+	   Merchant m=orderDetailsRepo.getOne(orderId).getProduct().getProductMerchant();
+	   double productPrice=orderDetailsRepo.getOne(orderId).getOrderAmount();
+	   double merchantRevenuePercentage=m.getMerchantRevPercent();
+	   double adminPrice=(merchantRevenuePercentage/100)*productPrice;
+	   double merchantPrice=productPrice-adminPrice;
+	   adminRepo.updateMerchantRevenue(m.getMerchantId(),merchantPrice);
+	   adminRepo.updateAdminRevenue(adminPrice);
+	   orderDetailsRepo.updateDeliveryStatus(orderId);
+	   return viewReturnedProduct();
 	}
 }
 

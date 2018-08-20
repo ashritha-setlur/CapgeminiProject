@@ -15,4 +15,14 @@ public interface AdminRepo extends JpaRepository<Admin, Integer>, CrudRepository
 	@Modifying
 	@Query("update Admin set minimumOrderAmount=?1")
 	public void setMinOrderAmount(double amount) ;
+	
+	 @Modifying
+	    @Transactional
+	    @Query("update Merchant m set m.merchantRevenue=m.merchantRevenue-?2 where m.merchantId=?1 ")
+		void updateMerchantRevenue(int merchantId,double merchantPrice);
+	    @Modifying
+	    @Transactional
+	    @Query("update Admin a set a.capstoreRevenue= a.capstoreRevenue-?1")
+		void updateAdminRevenue(double adminPrice);
+
 }

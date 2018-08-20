@@ -2,9 +2,13 @@ package com.capgemini.capstore.repo;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.OrderDetails;
@@ -25,4 +29,10 @@ public interface OrderDetailsRepo extends JpaRepository<OrderDetails, Integer>, 
 	public void orderStatus(int orderId);
 	@Query("select o from OrderDetails o where o.orderId = ?1")
 	public OrderDetails findOrderByOrderId(int orderId);
+	@Query("select o.orderId,o.product.productName,o.customer.firstName,customer.lastName,o.deliveryDate,o.orderDate,o.deliveryStatus,o.promo,o.orderAmount from OrderDetails o where o.deliveryStatus='Returned'")
+	List<OrderDetails> viewReturnedProduct();
+	@Modifying
+    @Transactional
+    @Query("update OrderDetails o set o.deliveryStatus='Refunded' where o.orderId=:id")
+	void updateDeliveryStatus(@Param("id")int orderId);
 }
