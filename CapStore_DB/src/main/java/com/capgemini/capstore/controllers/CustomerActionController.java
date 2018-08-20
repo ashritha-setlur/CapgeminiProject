@@ -11,16 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.capstore.beans.Address;
 import com.capgemini.capstore.beans.Authentication;
+import com.capgemini.capstore.beans.Cart;
 import com.capgemini.capstore.beans.Customer;
-import com.capgemini.capstore.beans.Feedback;
 import com.capgemini.capstore.beans.OrderDetails;
 import com.capgemini.capstore.beans.Product;
-import com.capgemini.capstore.beans.Rating;
 import com.capgemini.capstore.beans.Wishlist;
 import com.capgemini.capstore.services.CustomerServices;
 
@@ -30,52 +28,6 @@ public class CustomerActionController {
 
 	@Autowired
 	private CustomerServices customerServices;
-
-	@RequestMapping(value="/addFeedback",method=RequestMethod.POST)
-	public Feedback addFeedback(@RequestBody String feedBack) throws JSONException
-	{
-		JSONObject json=new JSONObject(feedBack);
-		Feedback feedbackObj=new Feedback();
-		feedbackObj.setFeedbackDesc(json.getString("feedbackdesc"));
-		Feedback feedback=customerServices.addFeedback(feedbackObj);
-		return feedback;
-	}
-	//to get product feedback
-	@RequestMapping(value="/getFeedback",method=RequestMethod.POST)
-	public List<String> getFeedback(@RequestBody String pid) throws JSONException
-	{
-		JSONObject json=new JSONObject(pid);
-		List<String> feedbacks=customerServices.getFeedbacks(json.getInt("pid"));
-		return feedbacks;
-
-	}
-
-	//add cart to customer object (only once)
-	//  (http://localhost:4496/addCart?custId=1)
-	@RequestMapping(value="/addCart",produces=MediaType.APPLICATION_JSON_VALUE)
-	public void addCartToCustomer(int custId) {
-		customerServices.addCart(custId);
-	}
-
-	//add product into the cart
-	//  (http://localhost:4496/addToCart?prodId=1&custId=1)
-	@RequestMapping(value="/addToCart",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
-	public void addToCart(int prodId,int custId) {
-		customerServices.addProductToCart(prodId,custId);
-	}
-
-	//remove product from the cart
-	//  (http://localhost:4496/removeFromCart?prodId=1&custId=1)
-	@RequestMapping(value="/removeFromCart",produces=MediaType.APPLICATION_JSON_VALUE)
-	public void removeFromCart(@RequestParam("prodId")int prodId,@RequestParam("custId")int custId) {
-		customerServices.removeProductFromCart(prodId, custId) ;
-	}
-	//view all the products from the cart
-	//  (http://localhost:4496/ViewCart?cartId=1)
-	@RequestMapping(value="/ViewCart",produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Product> viewCart(@RequestParam("cartId")int cartId) {
-		return customerServices .viewCart(cartId) ;
-	}
 
 	//getting delivery status
 	@RequestMapping(value="/getDeliveryStatus", method=RequestMethod.GET)
@@ -88,18 +40,13 @@ public class CustomerActionController {
 	{
 		customerServices.updateCustomer(customer);
 	}
-	//For Post Man
-	/*@RequestMapping(value="/updateCustomer", method=RequestMethod.POST)
-		public void updateCustomer(Customer customer,Principal principal)
-		{
-			mservices.updateCustomer(customer);
-		}*/
+
 	//customer can display his wishlist
 	@RequestMapping(value="/display" , method=RequestMethod.GET)
 	public Wishlist display (int custid) {
 		return customerServices.display(custid);
 	}
-	
+
 	// customer can display customer ordered items
 	@RequestMapping(value="/displayCustomerOrderedItems", method=RequestMethod.GET)
 	public List<OrderDetails> displayCustomerOrderedItems(int id){
@@ -152,6 +99,7 @@ public class CustomerActionController {
 		customerServices.registerCustomer(customerObj,auth);
 		return "success";
 	}
+
 	//Search for Products(by product name,product brand)
 	@RequestMapping(method=RequestMethod.POST, value={"/searchAction"},produces=MediaType.APPLICATION_JSON_VALUE)
 	public ArrayList<Product> search(@RequestBody String jSon) throws JSONException{
@@ -166,13 +114,13 @@ public class CustomerActionController {
 		return customerServices.retrieveShipmentDetails(customerId);		 
 	}
 
-	//Add Rating to a product
-	@RequestMapping(value="/addRating",method=RequestMethod.POST)
-	public Rating addRating(@RequestBody Rating rating)
-	{
-		Rating rate=customerServices.addRating(rating);
-		return rate;
-
+	@RequestMapping(value="/validatePromo" ,method=RequestMethod.GET)
+	public void promovalidate(int orderId, String promo){
+		customerServices.applyCoupon(orderId,promo);
 	}
 
+	@RequestMapping(value="/applydiscount", method=RequestMethod.GET)
+	public Cart applydiscount(int cartId){
+		return customerServices.applyDiscount(cartId);
+	}
 }

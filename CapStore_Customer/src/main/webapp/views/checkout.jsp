@@ -179,7 +179,6 @@
                         </ul>
 
                         <div id="accordion" role="tablist" class="mb-4">
-                            </div>
                             <div class="card">
                                 <div class="card-header" role="tab" id="headingThree">
                                     <h6 class="mb-0">

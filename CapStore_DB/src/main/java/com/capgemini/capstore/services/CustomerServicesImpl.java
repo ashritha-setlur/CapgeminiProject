@@ -1,6 +1,7 @@
 package com.capgemini.capstore.services;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -13,7 +14,9 @@ import com.capgemini.capstore.beans.Cart;
 import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Feedback;
 import com.capgemini.capstore.beans.OrderDetails;
+import com.capgemini.capstore.beans.PaymentMethod;
 import com.capgemini.capstore.beans.Product;
+import com.capgemini.capstore.beans.Promo;
 import com.capgemini.capstore.beans.Rating;
 import com.capgemini.capstore.beans.Transaction;
 import com.capgemini.capstore.beans.Wishlist;
@@ -23,7 +26,9 @@ import com.capgemini.capstore.repo.CustomerRepo;
 import com.capgemini.capstore.repo.FeedbackRepo;
 import com.capgemini.capstore.repo.OrderDetailsRepo;
 import com.capgemini.capstore.repo.ProductRepo;
+import com.capgemini.capstore.repo.PromoRepo;
 import com.capgemini.capstore.repo.RatingRepo;
+import com.capgemini.capstore.repo.TransactionRepo;
 import com.capgemini.capstore.repo.WishlistRepo;
 
 @Component(value="customerService")
@@ -53,6 +58,12 @@ public class CustomerServicesImpl implements CustomerServices {
 	@Autowired
 	private AuthenticationRepo aRepo;
 
+	@Autowired
+	private PromoRepo promoRepo;
+
+	@Autowired
+	private TransactionRepo transactionRepo;
+
 	private static int orderId=100;
 
 	@Override
@@ -64,7 +75,7 @@ public class CustomerServicesImpl implements CustomerServices {
 	@Override
 	public List<String> getFeedbacks(int pid) {
 		List<String> product_feedback_list = feedbackRepo.getFeedbackList(pid);
-		
+
 		return  product_feedback_list ;
 	}
 
@@ -148,7 +159,7 @@ public class CustomerServicesImpl implements CustomerServices {
 		return listOfproducts;
 	}
 
-	//wishlist display
+	//WishList display
 	@Override
 	public Wishlist display(int custid) {
 		Customer customer = customerRepo.getOne(custid);
@@ -236,6 +247,7 @@ public class CustomerServicesImpl implements CustomerServices {
 	public Customer registerCustomer(Customer customer,Authentication passwrd) {
 
 		Customer customer1;
+		addCart(customer.getId());
 		customerRepo.save(customer);
 		customer1=customerRepo.getCustomerId(customer.getMobileNo());
 		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -268,6 +280,53 @@ public class CustomerServicesImpl implements CustomerServices {
 	public Customer retrieveShipmentDetails(int customerId) {
 		//Service layer function which retrieves the details of customer
 		return customerRepo.getShipmentDetails(customerId);		
+	}
+
+	@Override
+	public void applyCoupon( int orderid,String promoName) {
+		Promo promo = promoRepo.findByPromoName(promoName);
+		OrderDetails order= orderDetailsRepo.getOrderDetails(orderid);
+		if(promo!=null)
+		{
+			LocalDate localdate = LocalDate.now();
+			Date date1= Date.valueOf(localdate);
+			if(promo.getStartDate().before(date1)&&promo.getEndDate().after(date1)&&order.getOrderAmount()>promo.getPromoQuantity())
+			{
+				order.setOrderAmount(order.getOrderAmount()-promo.getPromoQuantity());
+				orderDetailsRepo.save(order);
+			}
+		}
+	}
+	@Override
+	public Cart applyDiscount(int cartId) {
+		Cart cartProducts= cartRepo.findByCartId(cartId);
+		System.out.println(cartProducts);
+		List<Product> productlist= cartProducts.getProducts();
+		for(Product product:productlist)
+		{
+			String discount = product.getProductDiscount().getDiscountDesc();
+			int discount1= Integer.parseInt(discount);
+			float discountprice = (float) (0.01*discount1);
+			double price =  product.getProductPrice();
+			String finalprice= Double.toString(price-(price*discountprice));
+			product.getProductDiscount().setDiscountDesc(finalprice);
+		}
+		cartRepo.save(cartProducts);
+		return cartProducts;
+	}
+
+	@Override
+	public int saveTransaction(int paymentMethod)
+	{
+		Transaction transaction = new Transaction();
+		java.sql.Date transDate = new java.sql.Date(new java.util.Date().getTime());
+		transaction.setTransDate(transDate);
+		if(paymentMethod==1)
+			transaction.setPaymentMethod(new PaymentMethod(1,0));
+		else
+			transaction.setPaymentMethod(new PaymentMethod(0,1));
+		transactionRepo.save(transaction);
+		return transaction.getTransactionId();		
 	}
 }
 
