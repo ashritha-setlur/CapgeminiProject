@@ -12,6 +12,8 @@ public class MerchantServicesImpl implements MerchantServices {
 
 	@Autowired
 	private MerchantRepo mrepo;
+	
+		
 
 	@Override
 	public int addMerchant(Merchant merchant) {

@@ -30,7 +30,14 @@ public class Authentication {
 		this.userAccess = userAccess;
 		this.verification = verification;
 	}
-
+	public Authentication(int authId, String mobileNo, String password, String userAccess, int verification) {
+		super();
+		this.authId = authId;
+		this.mobileNo = mobileNo;
+		this.password = password;
+		this.userAccess = userAccess;
+		this.verification = verification;
+	}
 	//Getters and Setters
 	public String getMobileNo() {
 		return mobileNo;

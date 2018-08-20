@@ -1,0 +1,38 @@
+package com.capgemini.capstore.services;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.capgemini.capstore.beans.Authentication;
+import com.capgemini.capstore.beans.Customer;
+import com.capgemini.capstore.beans.Feedback;
+import com.capgemini.capstore.beans.OrderDetails;
+import com.capgemini.capstore.beans.Product;
+import com.capgemini.capstore.beans.Rating;
+import com.capgemini.capstore.beans.Wishlist;
+
+public interface CustomerServices {
+
+	public Feedback addFeedback(Feedback feedBack);
+	public List<Feedback> getFeedbacks(int id);
+	public void addCart(int custId) ;
+	public Product addProductToCart(int prodId,int custId) ;
+	public Product removeProductFromCart(int prodId,int custId) ;
+	public List<Product> viewCart(int cartId) ;
+	public String getDeliveryStatus(int orderId);
+	public void updateCustomer(Customer customer); 
+	public Wishlist display (int custid);
+	public List<OrderDetails> displayCustomerOrderedItems(int id);
+	public List<Product> getProductInRange(String searchedItem);
+	public List<Product> getProductAscPrice(String searchedItem);
+	public List<Product> getProductDescPrice(String searchedItem);
+	public List<Product> getProductMostViewd(String searchedItem);
+	public List<Product> getProductRating(String searchedItem);
+	public void orderStatus(int orderId, int num);
+	public boolean placeOrder(int custId,int cartId,int prodId) ;
+	public Rating addRating(Rating rating);
+	public Customer registerCustomer(Customer customer, Authentication passwrd);
+	public ArrayList<Product> searchByProductBrand(String product);
+	public ArrayList<Product> searchByProductName(String product);
+	public Customer retrieveShipmentDetails(int customerId);
+}

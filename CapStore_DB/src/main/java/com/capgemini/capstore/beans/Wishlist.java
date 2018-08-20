@@ -20,7 +20,6 @@ public class Wishlist {
 	@OneToMany
 	private List<Product> products;
 
-
 	//Constructors
 	public Wishlist() {
 		super();
@@ -28,12 +27,6 @@ public class Wishlist {
 	}
 
 	//Getters and Setters
-	public List<Product> getProducts() {
-		return products;
-	}
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
 
 	public int getWishlistId() {
 		return wishlistId;
@@ -41,5 +34,12 @@ public class Wishlist {
 
 	public void setWishlistId(int wishlistId) {
 		this.wishlistId = wishlistId;
+	}
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 }

@@ -8,7 +8,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Address")
 public class Address {
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	int address_id;
@@ -24,6 +24,27 @@ public class Address {
 	public Address() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public Address(int address_id, String addressLine1, String addressLine2, String city, String state, long pincode,
+			String country) {
+		super();
+		this.address_id = address_id;
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.city = city;
+		this.state = state;
+		this.pincode = pincode;
+		this.country = country;
+	}
+	public Address(String addressLine1, String addressLine2, String city, String state, long pincode, String country) {
+		super();
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.city = city;
+		this.state = state;
+		this.pincode = pincode;
+		this.country = country;
 	}
 
 

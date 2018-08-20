@@ -13,4 +13,6 @@ public interface MerchantServices {
 
 	public void deleteMerchant(int merchantId);
 
+	public Merchant registerCustomer(Merchant merchant, String password, String type);
+
 }
