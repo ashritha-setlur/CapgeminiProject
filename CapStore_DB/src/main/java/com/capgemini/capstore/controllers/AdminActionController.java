@@ -3,6 +3,7 @@ package com.capgemini.capstore.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -89,6 +90,11 @@ public class AdminActionController {
 	public List<Merchant> deleteThirdPartyMerchant(int merchantId) {
 		adminServices.deleteThirdPartyMerchant(merchantId);
 		return adminServices.viewThirdPartyMerchant();
+	}
+	//controller to call update CapStore_Revenue
+	@RequestMapping(value="/gettrans/{amount,productId}", method=RequestMethod.GET)
+	public boolean updateCapRevenue(@Param(value="amount") double amount,@Param(value="productId") int productId) {
+		return  adminServices.updateCapRevenue(amount,productId);
 	}
 }
 

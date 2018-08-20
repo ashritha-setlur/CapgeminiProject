@@ -19,6 +19,7 @@ import com.capgemini.capstore.repo.AuthenticationRepo;
 import com.capgemini.capstore.repo.CustomerRepo;
 import com.capgemini.capstore.repo.DiscountRepo;
 import com.capgemini.capstore.repo.MerchantRepo;
+import com.capgemini.capstore.repo.OrderDetailsRepo;
 import com.capgemini.capstore.repo.ProductRepo;
 import com.capgemini.capstore.repo.PromoRepo;
 import com.capgemini.capstore.repo.RatingRepo;
@@ -41,8 +42,8 @@ public class AdminServicesImpl implements AdminServices {
 	private AuthenticationRepo aRepo;
 	@Autowired
 	private RatingRepo ratingRepo;
-	//	@Autowired
-	//	private OrderDetailsRepo orderDetailsRepo;
+	@Autowired
+	private OrderDetailsRepo orderDetailsRepo;
 
 	@Autowired
 	private DiscountRepo discountRepo;
@@ -189,5 +190,18 @@ public class AdminServicesImpl implements AdminServices {
 	public void deletePromo(int promoId) {
 		promoRepo.deleteById(promoId);	
 	}
+	//updating revenue of capstore and merchant
+			public boolean updateCapRevenue(double amount, int productId)
+			{
+				Product product=orderDetailsRepo.findProductByProductId(productId);
+				Merchant merchant=product.getProductMerchant();
+				double totalPrice=product.getProductPrice();
+				double percent=merchant.getMerchantRevPercent();
+				double capstoreShare=(percent/100)*totalPrice;
+				double merchantShare=totalPrice-capstoreShare;
+				adminRepo.addCapstoreRevenue(capstoreShare);
+				merchantRepo.addMerchantRevenue(merchant.getMerchantId(),merchant.getMerchantRevenue()+merchantShare);
+				return true;	
+			}
 }
 
