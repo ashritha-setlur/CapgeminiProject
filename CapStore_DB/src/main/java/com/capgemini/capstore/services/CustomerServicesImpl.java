@@ -14,6 +14,7 @@ import com.capgemini.capstore.beans.Cart;
 import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Feedback;
 import com.capgemini.capstore.beans.OrderDetails;
+import com.capgemini.capstore.beans.PaymentMethod;
 import com.capgemini.capstore.beans.Product;
 import com.capgemini.capstore.beans.Promo;
 import com.capgemini.capstore.beans.Rating;
@@ -27,6 +28,7 @@ import com.capgemini.capstore.repo.OrderDetailsRepo;
 import com.capgemini.capstore.repo.ProductRepo;
 import com.capgemini.capstore.repo.PromoRepo;
 import com.capgemini.capstore.repo.RatingRepo;
+import com.capgemini.capstore.repo.TransactionRepo;
 import com.capgemini.capstore.repo.WishlistRepo;
 
 @Component(value="customerService")
@@ -58,6 +60,9 @@ public class CustomerServicesImpl implements CustomerServices {
 
 	@Autowired
 	private PromoRepo promoRepo;
+
+	@Autowired
+	private TransactionRepo transactionRepo;
 
 	private static int orderId=100;
 
@@ -154,7 +159,7 @@ public class CustomerServicesImpl implements CustomerServices {
 		return listOfproducts;
 	}
 
-	//wishlist display
+	//WishList display
 	@Override
 	public Wishlist display(int custid) {
 		Customer customer = customerRepo.getOne(custid);
@@ -308,6 +313,20 @@ public class CustomerServicesImpl implements CustomerServices {
 		}
 		cartRepo.save(cartProducts);
 		return cartProducts;
+	}
+
+	@Override
+	public int saveTransaction(int paymentMethod)
+	{
+		Transaction transaction = new Transaction();
+		java.sql.Date transDate = new java.sql.Date(new java.util.Date().getTime());
+		transaction.setTransDate(transDate);
+		if(paymentMethod==1)
+			transaction.setPaymentMethod(new PaymentMethod(1,0));
+		else
+			transaction.setPaymentMethod(new PaymentMethod(0,1));
+		transactionRepo.save(transaction);
+		return transaction.getTransactionId();		
 	}
 }
 
