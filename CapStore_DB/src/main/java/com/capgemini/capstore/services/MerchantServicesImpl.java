@@ -3,7 +3,7 @@ package com.capgemini.capstore.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.capgemini.capstore.beans.Authentication;
@@ -35,7 +35,7 @@ public class MerchantServicesImpl implements MerchantServices {
 
 		merchant1=merchantRepo.getMerchantId(merchant.getMobileNo());
 		@SuppressWarnings("unused")
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Authentication auth=new Authentication(merchant1.getMerchantId(),merchant1.getMobileNo(),password,"USER_MERCHANT",2);
 		if(type.equals("direct"))
 			auth.setUserAccess("USER_DIRECTMERCHANT");

@@ -27,7 +27,13 @@ public class PaymentMethod {
 		this.cash = cash;
 		this.netbanking = netbanking;
 	}
+	
 
+     public PaymentMethod(int cash, int netbanking) {
+		super();
+		this.cash = cash;
+		this.netbanking = netbanking;
+	}
 	//Getters and Setters
 	public int getId() {
 		return id;

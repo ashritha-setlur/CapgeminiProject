@@ -40,4 +40,5 @@ public interface CustomerServices {
 	public Customer retrieveShipmentDetails(int customerId);
 	public void applyCoupon( int orderid,String promoName);
 	public Cart applyDiscount(int cartId);
+	public int savetransaction(int paymentMethod);
 }
