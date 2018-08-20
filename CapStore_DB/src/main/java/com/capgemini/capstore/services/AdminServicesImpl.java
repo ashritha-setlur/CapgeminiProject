@@ -190,15 +190,11 @@ public class AdminServicesImpl implements AdminServices {
 		promoRepo.deleteById(promoId);	
 	}
 	@Override
-	public boolean validateMerchant(int merchantId) {
+	public boolean validateMerchant(int merchantId){
 		Merchant merchant=merchantRepo.getOne(merchantId);
-		
-		Authentication authentication=aRepo.getOne(merchantId);
-		
+		Authentication authentication=aRepo.getOne(merchant.getMerchantId());
 		authentication.setVerfication(2);
-		
 		aRepo.save(authentication);
-		
 		return true;
 	}
 }

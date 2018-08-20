@@ -40,7 +40,7 @@ public class CustomerActionController {
 		customerServices.updateCustomer(customer);
 	}
 
-	//customer can display his wishlist
+	//customer can display his Wishlist
 	@RequestMapping(value="/display" , method=RequestMethod.GET)
 	public Wishlist display (int custid) {
 		return customerServices.display(custid);
