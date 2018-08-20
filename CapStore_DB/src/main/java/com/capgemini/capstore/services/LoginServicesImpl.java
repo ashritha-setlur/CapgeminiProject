@@ -29,12 +29,7 @@ public class LoginServicesImpl implements UserDetailsService {
 		if (authenticate == null) {
 			throw new UsernameNotFoundException("User " + mobile_no + " was not found in the database");
 		}
-
-<<<<<<< HEAD
-=======
-		System.out.println("Found User: " +authenticate);
->>>>>>> 5e16b98c159ae057cfd14dedd4d8f8e18b03b22e
-		// [ROLE_USER, ROLE_ADMIN,..]
+			// [ROLE_USER, ROLE_ADMIN,..]
 		List<String> roleNames = this.loginRepo.getRoleNames(authenticate.getMobileNo());
 
 		List<GrantedAuthority> grantList = new ArrayList<>();
