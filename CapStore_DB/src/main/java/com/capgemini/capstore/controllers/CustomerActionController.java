@@ -35,24 +35,18 @@ public class CustomerActionController {
 		JSONObject json=new JSONObject(feedBack);
 		Feedback feedbackObj=new Feedback();
 		feedbackObj.setFeedbackDesc(json.getString("feedbackdesc"));
-//		Customer customer=new Customer();
-//		customer.setId(json.getInt("customerId"));
-//		Product product=new Product();
-//		product.setProductId(json.getInt("productId"));
-//		feedbackObj.setProduct(product);
-//		feedbackObj.setCustomer(customer);
 		Feedback feedback=customerServices.addFeedback(feedbackObj);
 		return feedback;
 	}
 	//to get product feedback
-		@RequestMapping(value="/getFeedback",method=RequestMethod.POST)
-		public List<String> getFeedback(@RequestBody String pid) throws JSONException
-		{
-			JSONObject json=new JSONObject(pid);
-			List<String> feedbacks=customerServices.getFeedbacks(json.getInt("pid"));
-			return feedbacks;
-			
-		}
+	@RequestMapping(value="/getFeedback",method=RequestMethod.POST)
+	public List<String> getFeedback(@RequestBody String pid) throws JSONException
+	{
+		JSONObject json=new JSONObject(pid);
+		List<String> feedbacks=customerServices.getFeedbacks(json.getInt("pid"));
+		return feedbacks;
+
+	}
 
 	//add cart to customer object (only once)
 	//  (http://localhost:4496/addCart?custId=1)
@@ -103,7 +97,7 @@ public class CustomerActionController {
 	public Wishlist display (int custid) {
 		return customerServices.display(custid);
 	}
-
+	
 	// customer can display customer ordered items
 	@RequestMapping(value="/displayCustomerOrderedItems", method=RequestMethod.GET)
 	public List<OrderDetails> displayCustomerOrderedItems(int id){
@@ -157,7 +151,7 @@ public class CustomerActionController {
 		customerServices.registerCustomer(customerObj,auth);
 		return "success";
 	}
-	//Search for Products(by product name,product brand and category name)
+	//Search for Products(by product name,product brand)
 	@RequestMapping(method=RequestMethod.POST, value={"/searchAction"},produces=MediaType.APPLICATION_JSON_VALUE)
 	public ArrayList<Product> search(@RequestBody String jSon) throws JSONException{
 		JSONObject json=new JSONObject(jSon);
@@ -170,7 +164,7 @@ public class CustomerActionController {
 	public Customer getDetails(int customerId) {		
 		return customerServices.retrieveShipmentDetails(customerId);		 
 	}
-	
+
 	//Add Rating to a product
 	@RequestMapping(value="/addRating",method=RequestMethod.POST)
 	public Rating addRating(@RequestBody Rating rating)
