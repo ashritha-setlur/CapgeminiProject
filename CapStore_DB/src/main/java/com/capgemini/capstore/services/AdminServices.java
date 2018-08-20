@@ -25,4 +25,5 @@ public interface AdminServices {
 	public double setAvgRatingOfProduct(int pId);
 	public Map<Integer,Double> AvgOfProducts_List(int mId);
 	public OrderDetails deliveringProducts(int orderId);
+	public boolean validateMerchant(int merchantId);
 }
