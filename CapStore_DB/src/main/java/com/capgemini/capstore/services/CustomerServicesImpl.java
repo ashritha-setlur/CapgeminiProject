@@ -105,11 +105,8 @@ public class CustomerServicesImpl implements CustomerServices {
 		return product ;
 	}
 	
-
-
 	@Override
-	public Product addItemToWishlist(int pid, int custid) {
-		Product product=productRepo.getOne(pid);
+	public void addWishlist(int custid) {
 		Customer customer = customerRepo.getOne(custid);
 		
 		//creating wishlist
@@ -118,7 +115,15 @@ public class CustomerServicesImpl implements CustomerServices {
 		//setting wishlist to the customer
 		customer.setWishlist(wishlistRepo.getOne(wishlist.getWishlistId()));
 		customerRepo.save(customer);
-		wishlist=wishlistRepo.getOne(customer.getWishlist().getWishlistId());
+		
+	}
+
+
+	@Override
+	public Product addItemToWishlist(int pid, int custid) {
+		Product product=productRepo.getOne(pid);
+		Customer customer = customerRepo.getOne(custid);
+		Wishlist wishlist=wishlistRepo.getOne(customer.getWishlist().getWishlistId());
 		List<Product> prod=wishlist.getProducts();
 		prod.add(product);
 		wishlist.setProducts(prod);

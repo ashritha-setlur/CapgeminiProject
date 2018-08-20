@@ -22,7 +22,8 @@ public interface CustomerServices {
 	public Product removeProductFromCart(int prodId,int custId) ;
 	public List<Product> viewCart(int cartId) ;
 	public String getDeliveryStatus(int orderId);
-	public void updateCustomer(Customer customer); 
+	public void updateCustomer(Customer customer);
+	public void addWishlist(int custid);
 	public Product addItemToWishlist(int pid,int custid);
 	
 	public void removeItemFromWishlist(int pid,int custid);
