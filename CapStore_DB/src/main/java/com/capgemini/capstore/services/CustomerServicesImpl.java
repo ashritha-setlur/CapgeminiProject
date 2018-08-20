@@ -12,18 +12,23 @@ import com.capgemini.capstore.beans.Authentication;
 import com.capgemini.capstore.beans.Cart;
 import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Feedback;
+import com.capgemini.capstore.beans.Merchant;
 import com.capgemini.capstore.beans.OrderDetails;
+import com.capgemini.capstore.beans.PaymentMethod;
 import com.capgemini.capstore.beans.Product;
 import com.capgemini.capstore.beans.Rating;
 import com.capgemini.capstore.beans.Transaction;
 import com.capgemini.capstore.beans.Wishlist;
+import com.capgemini.capstore.repo.AdminRepo;
 import com.capgemini.capstore.repo.AuthenticationRepo;
 import com.capgemini.capstore.repo.CartRepo;
 import com.capgemini.capstore.repo.CustomerRepo;
 import com.capgemini.capstore.repo.FeedbackRepo;
+import com.capgemini.capstore.repo.MerchantRepo;
 import com.capgemini.capstore.repo.OrderDetailsRepo;
 import com.capgemini.capstore.repo.ProductRepo;
 import com.capgemini.capstore.repo.RatingRepo;
+import com.capgemini.capstore.repo.TransactionRepo;
 import com.capgemini.capstore.repo.WishlistRepo;
 
 @Component(value="customerService")
@@ -53,7 +58,16 @@ public class CustomerServicesImpl implements CustomerServices {
 	@Autowired
 	private AuthenticationRepo aRepo;
 
-	private static int orderId=100;
+	@Autowired
+	private AdminRepo adminRepo;
+	
+	@Autowired
+	private MerchantRepo merchantRepo ;
+	
+    @Autowired
+    TransactionRepo transactionrepo;
+	
+	private static int orderId1=100;
 
 	@Override
 	public Feedback addFeedback(Feedback feedBack) {
@@ -112,28 +126,28 @@ public class CustomerServicesImpl implements CustomerServices {
 	}
 
 
-
+	//returns invoice number and saves all the order_details information
 	public int generateInvoice(int customerId, int productId, int orderAmount,int transactionId)
 	{
+		int orderId=orderId1++;
 		Product product=orderDetailsRepo.findProductByProductId(productId);
 		Customer customer=orderDetailsRepo.findCustomerByCustomerId(customerId);
-		@SuppressWarnings("unused")
-		Transaction trans=orderDetailsRepo.findtransactionBytransactionId(transactionId);
+		Transaction transaction=orderDetailsRepo.findtransactionBytransactionId(transactionId);
 		OrderDetails order=new OrderDetails();
-		order.setOrderId(orderId++);
+		order.setOrderId(orderId);
 		order.setCustomer(customer);
 		order.setProduct(product);
+		order.setTransaction(transaction);
 		order.setDeliveryStatus("confirmed");
-		@SuppressWarnings("unused")
-		long millis=System.currentTimeMillis();
+		order.setOrderAmount(orderAmount);
 		java.sql.Date orderDate = new java.sql.Date(new java.util.Date().getTime());
-		order.setDeliveryDate(orderDate);
+		order.setOrderDate(orderDate);
 		java.sql.Date deliveryDate = this.addDays(orderDate, 5);
 		order.setDeliveryDate(deliveryDate);
 		orderDetailsRepo.save(order);
-		return orderId++;	
+		return orderId;	
 	}
-
+	//method to save sql date required for generate invoice method
 	private Date addDays(Date orderDate, int days) {
 		Calendar c = Calendar.getInstance();
 		c.setTime(orderDate);
@@ -141,6 +155,40 @@ public class CustomerServicesImpl implements CustomerServices {
 		return new Date(c.getTimeInMillis());
 	}
 
+	//updating revenue of capstore and merchant
+	public boolean updateCapRevenue(double amount, int productId)
+	{
+		Product product=orderDetailsRepo.findProductByProductId(productId);
+		Merchant merchant=product.getProductMerchant();
+		double totalPrice=product.getProductPrice();
+		double percent=merchant.getMerchantRevPercent();
+		double capstoreShare=(percent/100)*totalPrice;
+		double merchantShare=totalPrice-capstoreShare;
+		adminRepo.addCapstoreRevenue(capstoreShare);
+		merchantRepo.addMerchantRevenue(merchant.getMerchantId(),merchant.getMerchantRevenue()+merchantShare);
+		return true;	
+	}
+	
+	//returns transaction number to calling method
+	public int savetransaction(int paymentMethod)
+	{
+		Transaction transaction = new Transaction();
+		java.sql.Date transDate = new java.sql.Date(new java.util.Date().getTime());
+		transaction.setTransDate(transDate);
+		if(paymentMethod==1)
+		{
+			transaction.setPaymentMethod(new PaymentMethod(1,0));
+		}else
+		{
+			transaction.setPaymentMethod(new PaymentMethod(0,1));
+		}
+		
+		transactionrepo.save(transaction);
+		
+		System.out.println(transaction.getTransactionId());
+		return transaction.getTransactionId();		
+	}
+	
 	//OrderedItemsDisplay
 	@Override
 	public List<OrderDetails> displayCustomerOrderedItems(int id) {
@@ -167,7 +215,7 @@ public class CustomerServicesImpl implements CustomerServices {
 	public void updateCustomer(Customer customer) {
 		customerRepo.save(customer);
 	}
-
+    //sorting products
 	@Override
 	public List<Product> getProductInRange(String searchedItem) {
 		List<Product> result = productRepo.getProductsWithinRange(searchedItem);
@@ -198,7 +246,7 @@ public class CustomerServicesImpl implements CustomerServices {
 
 		return productRepo.getBestProducts(searchedItem);
 	}
-
+    //delivery status
 	@Override
 	public void orderStatus(int orderId, int num){
 		if(num==1){
@@ -214,6 +262,7 @@ public class CustomerServicesImpl implements CustomerServices {
 			System.out.println("returned");
 		}
 	}
+	//placing order
 	@Override
 	public boolean placeOrder(int custId, int cartId, int prodId) {
 

@@ -35,4 +35,7 @@ public interface CustomerServices {
 	public ArrayList<Product> searchByProductBrand(String product);
 	public ArrayList<Product> searchByProductName(String product);
 	public Customer retrieveShipmentDetails(int customerId);
+	public int generateInvoice(int customerId, int productId, int orderAmount,int transactionId);
+	public int savetransaction(int paymentMethod);
+	public boolean updateCapRevenue(double amount, int productId);
 }

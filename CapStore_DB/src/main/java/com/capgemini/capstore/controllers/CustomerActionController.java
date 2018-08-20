@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -109,26 +110,28 @@ public class CustomerActionController {
 	public List<OrderDetails> displayCustomerOrderedItems(int id){
 		return customerServices.displayCustomerOrderedItems(id);
 	}
+	// Sorting the products based on given range
 
 	@RequestMapping(value="/range", method=RequestMethod.GET)
 	public List<Product> range(String searchedItem){		
 		return customerServices.getProductInRange(searchedItem);
 	}
-
+    // Sorting the products in ascending order based on their price
 	@RequestMapping(value="/ascprice", method=RequestMethod.GET)
 	public List<Product> ascPrice(String searchedItem){
 		return customerServices.getProductAscPrice(searchedItem);
 	}
-
+    //Sorting the products in descending order based on their price
 	@RequestMapping(value="/descprice", method=RequestMethod.GET)
 	public List<Product> descPrice(String searchedItem){
 		return customerServices.getProductDescPrice(searchedItem);
 	}
-
+    // Sorting the products in descending order based on their views so that mostly viewed products come first
 	@RequestMapping(value="/mostlyviewd", method=RequestMethod.GET)
 	public List<Product> mostlyViewed(String searchedItem){
 		return customerServices.getProductMostViewd(searchedItem);
 	}
+	//Sorting the products in descending order based on their ratings so that products with high rating comes first
 	@RequestMapping(value="/productrating",  method=RequestMethod.GET)
 	public List<Product> topRating(String searchedItem){		
 		return customerServices.getProductRating(searchedItem);
@@ -171,4 +174,37 @@ public class CustomerActionController {
 		return customerServices.retrieveShipmentDetails(customerId);		 
 	}
 
+	//controller to test through postman to generate invoice
+	@RequestMapping(value="/getInvoice", method=RequestMethod.GET)
+	public int getInvoice(int customerId,int productId, int orderAmount,int transactionId) {
+		return customerServices.generateInvoice(customerId, productId, orderAmount,transactionId);	
+	}
+	
+	//controller to call generate invoice
+	@RequestMapping(value="/getInvoice/{customerId,productId,orderAmount,transactionId}", method=RequestMethod.GET)
+	public int generateInvoice(@Param("customerId") int customerId, @Param("productId")int productId, @Param("orderAmount") int orderAmount,@Param("transactionId")int transactionId) {
+		return customerServices.generateInvoice(customerId, productId, orderAmount,transactionId);	
+	}
+	
+	//controller to test through postman to get transaction number
+	@RequestMapping(value="/gettrans", method=RequestMethod.GET)
+	public int gettransaction( int method) {
+		return  customerServices.savetransaction(method);
+	}
+	
+	
+	//controller to call transaction number
+	@RequestMapping(value="/gettrans/{method}", method=RequestMethod.GET)
+	public int generatetransaction(@Param(value="method") int method) {
+		return  customerServices.savetransaction(method);
+	}
+	
+	
+	//controller to call update CapStore_Revenue
+	@RequestMapping(value="/gettrans/{amount,productId}", method=RequestMethod.GET)
+	public boolean updateCapRevenue(@Param(value="amount") double amount,@Param(value="productId") int productId) {
+		return  customerServices.updateCapRevenue(amount,productId);
+	}
+	
+	
 }

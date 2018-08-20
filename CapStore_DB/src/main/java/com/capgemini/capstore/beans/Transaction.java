@@ -38,6 +38,12 @@ public class Transaction {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Transaction(PaymentMethod paymentMethod, Date transDate) {
+		super();
+		this.paymentMethod = paymentMethod;
+		this.transDate = transDate;
+	}
+
 	//Getters and Setters
 	public int getTransactionId() {
 		return transactionId;
