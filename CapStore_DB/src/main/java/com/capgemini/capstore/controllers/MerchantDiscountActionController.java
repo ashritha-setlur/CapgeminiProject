@@ -10,27 +10,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.capstore.beans.Discount;
-import com.capgemini.capstore.services.MerchantDiscountServices;
+import com.capgemini.capstore.services.MerchantServices;
 
 @RestController
 public class MerchantDiscountActionController {
-@Autowired
-private MerchantDiscountServices mdservices;
-//merchant adds discounts
-@RequestMapping(value="/addMerchantDiscount",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
-public void addMerchantDiscount(@RequestBody Discount discount) {
-	mdservices.addDiscount(discount);
-}
+	@Autowired
+	private MerchantServices merchantService;
 
-@RequestMapping(value="/getAllMerchantDiscounts",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
-public List<Discount>getAllMerchantDiscounts(){
-	return mdservices.displayAllDiscounts();
+	//merchant adds discounts
+	@RequestMapping(value="/addMerchantDiscount",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
+	public void addMerchantDiscount(@RequestBody Discount discount) {
+		merchantService.addDiscount(discount);
 	}
 
-@RequestMapping(value="/deleteMerchantDiscount",method=RequestMethod.DELETE,produces=MediaType.APPLICATION_JSON_VALUE)
-public void deleteMerchantDiscount (@RequestBody Discount discount) {
-	
-	mdservices.deleteDiscount(discount.getDiscountId());
-}
+	@RequestMapping(value="/getAllMerchantDiscounts",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Discount>getAllMerchantDiscounts(){
+		return merchantService.displayAllDiscounts();
+	}
+
+	@RequestMapping(value="/deleteMerchantDiscount",method=RequestMethod.DELETE,produces=MediaType.APPLICATION_JSON_VALUE)
+	public void deleteMerchantDiscount (@RequestBody Discount discount) {
+		merchantService.deleteDiscount(discount.getDiscountId());
+	}
 }
 

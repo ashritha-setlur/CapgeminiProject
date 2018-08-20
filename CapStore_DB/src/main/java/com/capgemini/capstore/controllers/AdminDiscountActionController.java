@@ -10,25 +10,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.capstore.beans.Discount;
-import com.capgemini.capstore.services.AdminDiscountServices;
+import com.capgemini.capstore.services.AdminServices;
 
 @RestController
 public class AdminDiscountActionController {
-@Autowired
-private AdminDiscountServices adservices;
+	@Autowired
+	AdminServices adminServices;
 //admin adds discounts
 @RequestMapping(value="/addAdminDiscount",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 public void addAdminDiscount(@RequestBody Discount discount) {
-	adservices.addDiscount(discount);
+	adminServices.addDiscount(discount);
 }
 @RequestMapping(value="/getAllDiscounts",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 public List<Discount> getAllDiscounts() {
-	return adservices.displayAllDiscounts();
+	return adminServices.displayAllDiscounts();
 }
 
 @RequestMapping(value="/deleteAdminDiscount",method=RequestMethod.DELETE,produces=MediaType.APPLICATION_JSON_VALUE)
 public void deleteAdminDiscount (@RequestBody Discount discount) {
-	adservices.deleteDiscount(discount.getDiscountId());
+	adminServices.deleteDiscount(discount.getDiscountId());
 }
 }
 

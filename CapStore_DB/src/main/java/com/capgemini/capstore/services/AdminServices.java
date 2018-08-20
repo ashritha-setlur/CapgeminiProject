@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.capgemini.capstore.beans.Customer;
+import com.capgemini.capstore.beans.Discount;
 import com.capgemini.capstore.beans.Merchant;
 import com.capgemini.capstore.beans.Product;
+import com.capgemini.capstore.beans.Promo;
 
 public interface AdminServices {
 
@@ -23,5 +25,11 @@ public interface AdminServices {
 	public double setAvgRatingOfMerchant(int mId);
 	public double setAvgRatingOfProduct(int pId);
 	public Map<Integer,Double> AvgOfProducts_List(int mId);
-	
+	public int addDiscount(Discount discount);
+	public List<Discount> displayAllDiscounts();
+	public void deleteDiscount(int discountId);
+	public int addPromo(Promo promo);
+	public List<Promo> displayAllPromos();
+	public void deletePromo(int promoId);
+
 }

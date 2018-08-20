@@ -10,23 +10,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.capstore.beans.Promo;
-import com.capgemini.capstore.services.AdminPromoServices;
+import com.capgemini.capstore.services.AdminServices;
 
 @RestController
 public class AdminPromoActionController {
-@Autowired
-private AdminPromoServices apservices;
-//admin adds promos
-@RequestMapping(value="/addAdminPromo",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
-public void addAdminPromo(@RequestBody Promo promo) {
-	apservices.addPromo(promo);
-}
-@RequestMapping(value="/getAllPromos",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
-public List<Promo> getAllPromos(){
-	return apservices.displayAllPromos();
-}
-@RequestMapping(value="/deleteAdminPromo",method=RequestMethod.DELETE,produces=MediaType.APPLICATION_JSON_VALUE)
-public void deleteAdminPromo(@RequestBody Promo promo) {
-	apservices.deletePromo(promo.getPromoId());
-}
+	@Autowired
+	AdminServices adminServices;
+	//admin adds promos
+	@RequestMapping(value="/addAdminPromo",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
+	public void addAdminPromo(@RequestBody Promo promo) {
+		adminServices.addPromo(promo);
+	}
+	@RequestMapping(value="/getAllPromos",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Promo> getAllPromos(){
+		return adminServices.displayAllPromos();
+	}
+	@RequestMapping(value="/deleteAdminPromo",method=RequestMethod.DELETE,produces=MediaType.APPLICATION_JSON_VALUE)
+	public void deleteAdminPromo(@RequestBody Promo promo) {
+		adminServices.deletePromo(promo.getPromoId());
+	}
 }

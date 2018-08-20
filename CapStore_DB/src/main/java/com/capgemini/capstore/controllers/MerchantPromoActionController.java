@@ -10,23 +10,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.capstore.beans.Promo;
-import com.capgemini.capstore.services.MerchantPromoServices;
+import com.capgemini.capstore.services.MerchantServices;
 
 @RestController
 public class MerchantPromoActionController {
-@Autowired
-private MerchantPromoServices mpservices;
-//merchant adds promos
-@RequestMapping(value="/addMerchantPromo",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
-public void addMerchantPromo(@RequestBody Promo promo) {
-	mpservices.addPromo(promo);
-}
-@RequestMapping(value="/displayAllMerchantPromos",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
-public List<Promo> getAllPromos(){
-	return mpservices.displayAllPromos();
-}
-@RequestMapping(value="/deleteMerchantPromo",method=RequestMethod.DELETE,produces=MediaType.APPLICATION_JSON_VALUE)
-public void deleteMerchantPromo(@RequestBody Promo promo) {
-	mpservices.deletePromo(promo.getPromoId());
-}
+	@Autowired
+	private MerchantServices merchantService;
+	//merchant adds promos
+	@RequestMapping(value="/addMerchantPromo",method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
+	public void addMerchantPromo(@RequestBody Promo promo) {
+		merchantService.addPromo(promo);
+	}
+	@RequestMapping(value="/displayAllMerchantPromos",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Promo> getAllPromos(){
+		return merchantService.displayAllPromos();
+	}
+	@RequestMapping(value="/deleteMerchantPromo",method=RequestMethod.DELETE,produces=MediaType.APPLICATION_JSON_VALUE)
+	public void deleteMerchantPromo(@RequestBody Promo promo) {
+		merchantService.deletePromo(promo.getPromoId());
+	}
 }

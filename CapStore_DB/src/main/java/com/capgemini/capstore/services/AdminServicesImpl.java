@@ -10,13 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.capgemini.capstore.beans.Customer;
+import com.capgemini.capstore.beans.Discount;
 import com.capgemini.capstore.beans.Merchant;
 import com.capgemini.capstore.beans.Product;
+import com.capgemini.capstore.beans.Promo;
 import com.capgemini.capstore.repo.AdminRepo;
 import com.capgemini.capstore.repo.AuthenticationRepo;
 import com.capgemini.capstore.repo.CustomerRepo;
+import com.capgemini.capstore.repo.DiscountRepo;
 import com.capgemini.capstore.repo.MerchantRepo;
 import com.capgemini.capstore.repo.ProductRepo;
+import com.capgemini.capstore.repo.PromoRepo;
 import com.capgemini.capstore.repo.RatingRepo;
 
 @Component(value="adminService")
@@ -37,9 +41,13 @@ public class AdminServicesImpl implements AdminServices {
 	private AuthenticationRepo aRepo;
 	@Autowired
 	private RatingRepo ratingRepo;
-//	@Autowired
-//	private OrderDetailsRepo orderDetailsRepo;
-//	
+	//	@Autowired
+	//	private OrderDetailsRepo orderDetailsRepo;
+
+	@Autowired
+	private DiscountRepo discountRepo;
+	@Autowired
+	private PromoRepo promoRepo;
 
 
 	//Method to add Merchant Details
@@ -153,6 +161,33 @@ public class AdminServicesImpl implements AdminServices {
 			product_Avg_list.put(i, avgRating);
 		}
 		return product_Avg_list;
+	}
+
+	@Override
+	public int addDiscount(Discount discount) {
+		discountRepo.save(discount);
+		return discount.getDiscountId();
+	}
+	@Override
+	public List<Discount> displayAllDiscounts() {
+		return discountRepo.findAll();
+	}
+	@Override
+	public void deleteDiscount(int discountId) {
+		discountRepo.deleteById(discountId);
+	}
+	@Override
+	public int addPromo(Promo promo) {
+		promoRepo.save(promo);
+		return promo.getPromoId();
+	}
+	@Override
+	public List<Promo> displayAllPromos() {
+		return promoRepo.findAll();
+	}
+	@Override
+	public void deletePromo(int promoId) {
+		promoRepo.deleteById(promoId);	
 	}
 }
 
