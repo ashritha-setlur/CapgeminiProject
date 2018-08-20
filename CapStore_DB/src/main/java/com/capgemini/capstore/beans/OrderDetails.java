@@ -17,7 +17,11 @@ public class OrderDetails {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+<<<<<<< HEAD
 	private int orderId = 100;
+=======
+	private int orderId;
+>>>>>>> 5e16b98c159ae057cfd14dedd4d8f8e18b03b22e
 	@OneToOne(cascade=CascadeType.ALL)
 	private Product product;
 	@OneToOne(cascade=CascadeType.ALL)

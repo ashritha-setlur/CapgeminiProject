@@ -30,6 +30,10 @@ public class LoginServicesImpl implements UserDetailsService {
 			throw new UsernameNotFoundException("User " + mobile_no + " was not found in the database");
 		}
 
+<<<<<<< HEAD
+=======
+		System.out.println("Found User: " +authenticate);
+>>>>>>> 5e16b98c159ae057cfd14dedd4d8f8e18b03b22e
 		// [ROLE_USER, ROLE_ADMIN,..]
 		List<String> roleNames = this.loginRepo.getRoleNames(authenticate.getMobileNo());
 
@@ -41,9 +45,7 @@ public class LoginServicesImpl implements UserDetailsService {
 				grantList.add(authority);
 			}
 		}
-
 		UserDetails userDetails = (UserDetails) new User(authenticate.getMobileNo(),authenticate.getPassword(), grantList);
-
 		return userDetails;
 	}
 

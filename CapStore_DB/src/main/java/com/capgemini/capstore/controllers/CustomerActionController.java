@@ -85,10 +85,9 @@ public class CustomerActionController {
 	}
 	// Register Customer
 	@RequestMapping(method=RequestMethod.POST,value={"/customerRegister"},produces=MediaType.APPLICATION_JSON_VALUE)
-	public String registerAction(@RequestBody String json) throws JSONException {
+	public String registerAction(@RequestBody JSONObject jSon) throws JSONException {
 		Customer customerObj=new Customer();
 		Authentication auth=new Authentication();
-		JSONObject jSon=new JSONObject(json);
 		customerObj.setFirstName(jSon.getString("firstName"));
 		customerObj.setLastName(jSon.getString("lastName"));
 		customerObj.setGender(jSon.getString("gender"));
