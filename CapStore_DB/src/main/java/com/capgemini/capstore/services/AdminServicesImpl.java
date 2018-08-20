@@ -39,7 +39,7 @@ public class AdminServicesImpl implements AdminServices {
 	private RatingRepo ratingRepo;
 //	@Autowired
 //	private OrderDetailsRepo orderDetailsRepo;
-//	
+	
 
 
 	//Method to add Merchant Details
