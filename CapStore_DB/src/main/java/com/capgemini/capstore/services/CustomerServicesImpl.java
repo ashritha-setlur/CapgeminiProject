@@ -62,10 +62,10 @@ public class CustomerServicesImpl implements CustomerServices {
 	}
 
 	@Override
-	public List<Feedback> getFeedbacks(int pid) {
-		List<Feedback> f=new ArrayList<>();
-		f.add(feedbackRepo.getFeedbacksForProduct(pid));
-		return f;
+	public List<String> getFeedbacks(int pid) {
+		List<String> product_feedback_list = feedbackRepo.getFeedbackList(pid);
+		
+		return  product_feedback_list ;
 	}
 
 	//add a cart to customer object

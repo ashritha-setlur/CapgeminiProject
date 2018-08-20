@@ -34,25 +34,24 @@ public class CustomerActionController {
 		JSONObject json=new JSONObject(feedBack);
 		Feedback feedbackObj=new Feedback();
 		feedbackObj.setFeedbackDesc(json.getString("feedbackdesc"));
-		Customer customer=new Customer();
-		customer.setId(json.getInt("customerId"));
-		Product product=new Product();
-		product.setProductId(json.getInt("productId"));
-		feedbackObj.setProduct(product);
-		feedbackObj.setCustomer(customer);
+//		Customer customer=new Customer();
+//		customer.setId(json.getInt("customerId"));
+//		Product product=new Product();
+//		product.setProductId(json.getInt("productId"));
+//		feedbackObj.setProduct(product);
+//		feedbackObj.setCustomer(customer);
 		Feedback feedback=customerServices.addFeedback(feedbackObj);
 		return feedback;
 	}
-
 	//to get product feedback
-	@RequestMapping(value="/getFeedback",method=RequestMethod.POST)
-	public List<Feedback> getFeedback(@RequestBody String pid) throws JSONException
-	{
-		JSONObject json=new JSONObject(pid);
-		List<Feedback> feedbacks=customerServices.getFeedbacks(json.getInt("pid"));
-		return feedbacks;
-
-	}
+		@RequestMapping(value="/getFeedback",method=RequestMethod.POST)
+		public List<String> getFeedback(@RequestBody String pid) throws JSONException
+		{
+			JSONObject json=new JSONObject(pid);
+			List<String> feedbacks=customerServices.getFeedbacks(json.getInt("pid"));
+			return feedbacks;
+			
+		}
 
 	//add cart to customer object (only once)
 	//  (http://localhost:4496/addCart?custId=1)
