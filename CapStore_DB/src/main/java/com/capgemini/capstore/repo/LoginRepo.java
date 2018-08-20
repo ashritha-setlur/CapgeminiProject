@@ -1,4 +1,4 @@
-package com.capgemini.capstore.dao;
+package com.capgemini.capstore.repo;
 
 import java.util.List;
 
@@ -14,21 +14,19 @@ import com.capgemini.capstore.beans.Authentication;
 
 @Repository
 @Transactional
-public class AuthenticationDAO {
+public class LoginRepo {
 
 	@Autowired
 	private EntityManager entityManager;
 
+	@SuppressWarnings("unchecked")
 	public List<String> getRoleNames(String mobileNumber) {
-		/*String sql = "Select ur.userAccess from " + Authentication.class.getName() + " ur " //
-				+ " where ur.Authentication.mobileNo = :mobileNo ";
-		 */
+
 		String sql = "select userAccess from Authentication where mobileNo = :mobileNo";
 		Query query = this.entityManager.createQuery(sql, String.class);
 		query.setParameter("mobileNo", mobileNumber);
 		return query.getResultList();
 	}
-
 
 	public Authentication findUserAccount(String mobile_no) {
 		try {
@@ -43,4 +41,5 @@ public class AuthenticationDAO {
 			return null;
 		}
 	}
+
 }
