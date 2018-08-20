@@ -74,15 +74,7 @@ public class CustomerServicesImpl implements CustomerServices {
 		return  product_feedback_list ;
 	}
 
-	//add a cart to customer object
-	@Override
-	public void addCart(int custId) {
-		Customer customer = customerRepo.getOne(custId);
-		Cart cart = new Cart() ;
-		cartRepo.save(cart) ;
-		customer.setCart(cartRepo.getOne(cart.getCartId()));
-		customerRepo.save(customer) ;
-	}
+	
 
 	//add a product to the cart
 	@Override
@@ -242,6 +234,8 @@ public class CustomerServicesImpl implements CustomerServices {
 	public Customer registerCustomer(Customer customer,Authentication passwrd) {
 
 		Customer customer1;
+		customer.setCart(new Cart());
+		customer.setWishlist(new Wishlist());
 		customerRepo.save(customer);
 		customer1=customerRepo.getCustomerId(customer.getMobileNo());
 		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

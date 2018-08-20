@@ -18,7 +18,6 @@ public interface CustomerServices {
 
 	public Feedback addFeedback(Feedback feedBack);
 	public List<String> getFeedbacks(int id);
-	public void addCart(int custId) ;
 	public Product addProductToCart(int prodId,int custId) ;
 	public Product removeProductFromCart(int prodId,int custId) ;
 	public List<Product> viewCart(int cartId) ;
