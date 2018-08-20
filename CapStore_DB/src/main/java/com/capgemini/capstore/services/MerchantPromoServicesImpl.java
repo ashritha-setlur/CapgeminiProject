@@ -29,5 +29,5 @@ private MerchantPromoRepo mprorepo;
 	public void deletePromo(int promoId) {
 		mprorepo.deleteById(promoId);
 }
-	}
+}
 

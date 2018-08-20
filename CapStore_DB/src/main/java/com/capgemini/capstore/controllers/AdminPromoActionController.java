@@ -28,6 +28,5 @@ public List<Promo> getAllPromos(){
 @RequestMapping(value="/deleteAdminPromo",method=RequestMethod.DELETE,produces=MediaType.APPLICATION_JSON_VALUE)
 public void deleteAdminPromo(@RequestBody Promo promo) {
 	apservices.deletePromo(promo.getPromoId());
-
 }
 }

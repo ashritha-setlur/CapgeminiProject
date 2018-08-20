@@ -27,6 +27,7 @@ public List<Discount> displayAllDiscounts() {
 @Override
 public void deleteDiscount(int discountId) {
 	discrepo.deleteById(discountId);
-	}
+	
+}
 }
 

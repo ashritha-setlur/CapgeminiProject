@@ -32,6 +32,5 @@ public void deleteMerchantDiscount (@RequestBody Discount discount) {
 	
 	mdservices.deleteDiscount(discount.getDiscountId());
 }
-
 }
 

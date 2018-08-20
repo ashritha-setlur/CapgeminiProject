@@ -28,7 +28,7 @@ private MerchantDiscountRepo mdiscrepo;
 	public void deleteDiscount(int discountId) {
 	mdiscrepo.deleteById(discountId);
 		
-	}
+}
 	
 }
 

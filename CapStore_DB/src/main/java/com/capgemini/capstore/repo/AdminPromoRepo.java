@@ -7,5 +7,4 @@ import com.capgemini.capstore.beans.Promo;
 
 @Repository
 public interface AdminPromoRepo extends JpaRepository<Promo,Integer>{
-
 }

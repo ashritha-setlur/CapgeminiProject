@@ -29,7 +29,6 @@ public List<Discount> getAllDiscounts() {
 @RequestMapping(value="/deleteAdminDiscount",method=RequestMethod.DELETE,produces=MediaType.APPLICATION_JSON_VALUE)
 public void deleteAdminDiscount (@RequestBody Discount discount) {
 	adservices.deleteDiscount(discount.getDiscountId());
-
 }
 }
 

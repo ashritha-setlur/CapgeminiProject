@@ -7,5 +7,4 @@ import com.capgemini.capstore.beans.Discount;
 
 @Repository
 public interface AdminDiscountRepo extends JpaRepository<Discount,Integer> {
-
 }

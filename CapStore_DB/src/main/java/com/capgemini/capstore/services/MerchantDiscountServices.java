@@ -11,4 +11,5 @@ public interface MerchantDiscountServices {
 	public List<Discount> displayAllDiscounts();
 	
 	public void deleteDiscount(int discountId);
+
 }

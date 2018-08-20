@@ -12,5 +12,6 @@ public interface AdminDiscountServices {
 	
 	public void deleteDiscount(int discountId);
 
+	
 }
 

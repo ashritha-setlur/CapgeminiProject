@@ -26,5 +26,4 @@ public List<Promo> displayAllPromos() {
 public void deletePromo(int promoId) {
 	prorepo.deleteById(promoId);	
 }
-
 }

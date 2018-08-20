@@ -9,6 +9,5 @@ public interface MerchantPromoServices {
 	public int addPromo(Promo promo);	
 	public List<Promo> displayAllPromos();
 	public void deletePromo(int promoId);
-
 }
 
