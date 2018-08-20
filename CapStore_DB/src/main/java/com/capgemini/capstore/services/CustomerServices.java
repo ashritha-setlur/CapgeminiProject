@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.capgemini.capstore.beans.Authentication;
+import com.capgemini.capstore.beans.Cart;
 import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Feedback;
 import com.capgemini.capstore.beans.OrderDetails;
@@ -14,7 +15,7 @@ import com.capgemini.capstore.beans.Wishlist;
 public interface CustomerServices {
 
 
-	
+
 	public Feedback addFeedback(Feedback feedBack);
 	public List<String> getFeedbacks(int id);
 	public void addCart(int custId) ;
@@ -37,4 +38,6 @@ public interface CustomerServices {
 	public ArrayList<Product> searchByProductBrand(String product);
 	public ArrayList<Product> searchByProductName(String product);
 	public Customer retrieveShipmentDetails(int customerId);
+	public void applyCoupon( int orderid,String promoName);
+	public Cart applyDiscount(int cartId);
 }
