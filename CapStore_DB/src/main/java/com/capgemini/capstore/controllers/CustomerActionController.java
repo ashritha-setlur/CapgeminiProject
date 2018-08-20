@@ -98,6 +98,21 @@ public class CustomerActionController {
 		{
 			mservices.updateCustomer(customer);
 		}*/
+	
+	
+	//Adding products to wishlist
+	@RequestMapping(value="/addItem")
+	public Product addProduct(int pid,int cid)
+	{
+		return customerServices.addItemToWishlist(pid,cid);
+	}
+	
+	//removing products from wishlist
+	@RequestMapping(value="/removeItem")
+	public void delProduct(int pid,int cid)
+	{
+		customerServices.removeItemFromWishlist(pid,cid);
+	}
 	//customer can display his wishlist
 	@RequestMapping(value="/display" , method=RequestMethod.GET)
 	public Wishlist display (int custid) {

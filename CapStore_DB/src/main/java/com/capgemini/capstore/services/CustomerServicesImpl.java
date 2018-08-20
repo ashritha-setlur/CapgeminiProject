@@ -104,6 +104,43 @@ public class CustomerServicesImpl implements CustomerServices {
 		cartRepo.save(cart) ;
 		return product ;
 	}
+	
+
+
+	@Override
+	public Product addItemToWishlist(int pid, int custid) {
+		Product product=productRepo.getOne(pid);
+		Customer customer = customerRepo.getOne(custid);
+		
+		//creating wishlist
+		Wishlist wishlist=new Wishlist();
+		wishlistRepo.save(wishlist);
+		//setting wishlist to the customer
+		customer.setWishlist(wishlistRepo.getOne(wishlist.getWishlistId()));
+		customerRepo.save(customer);
+		wishlist=wishlistRepo.getOne(customer.getWishlist().getWishlistId());
+		List<Product> prod=wishlist.getProducts();
+		prod.add(product);
+		wishlist.setProducts(prod);
+		wishlistRepo.save(wishlist);
+		return product;
+
+	}
+
+
+
+	@Override
+	public void removeItemFromWishlist(int pid, int custid) {
+		Product product=productRepo.getOne(pid);
+		Customer customer = customerRepo.getOne(custid);
+		Wishlist wishlist=wishlistRepo.getOne(customer.getWishlist().getWishlistId());
+		List<Product> prod=wishlist.getProducts();
+		prod.remove(product);
+		wishlist.setProducts(prod);
+		
+		wishlistRepo.save(wishlist);
+		
+	}
 
 	//display all the products from the cart
 	@Override
