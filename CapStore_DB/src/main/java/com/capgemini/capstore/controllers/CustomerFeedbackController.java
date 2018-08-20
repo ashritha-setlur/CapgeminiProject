@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.capstore.beans.Feedback;
+import com.capgemini.capstore.beans.Rating;
 import com.capgemini.capstore.services.CustomerServices;
 
 @Controller
@@ -22,8 +23,7 @@ public class CustomerFeedbackController {
 	private CustomerServices customerServices;
 
 	@RequestMapping(value="/addFeedback",method=RequestMethod.POST)
-	public Feedback addFeedback(@RequestBody String feedBack) throws JSONException
-	{
+	public Feedback addFeedback(@RequestBody String feedBack) throws JSONException{
 		JSONObject json=new JSONObject(feedBack);
 		Feedback feedbackObj=new Feedback();
 		feedbackObj.setFeedbackDesc(json.getString("feedbackdesc"));
@@ -36,5 +36,12 @@ public class CustomerFeedbackController {
 		JSONObject json=new JSONObject(pid);
 		List<String> feedbacks=customerServices.getFeedbacks(json.getInt("pid"));
 		return feedbacks;
+	}
+
+	//Add Rating to a product
+	@RequestMapping(value="/addRating",method=RequestMethod.POST)
+	public Rating addRating(@RequestBody Rating rating){
+		Rating rate=customerServices.addRating(rating);
+		return rate;
 	}
 }

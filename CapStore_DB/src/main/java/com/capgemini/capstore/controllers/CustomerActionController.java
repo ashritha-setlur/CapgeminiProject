@@ -19,7 +19,6 @@ import com.capgemini.capstore.beans.Cart;
 import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.OrderDetails;
 import com.capgemini.capstore.beans.Product;
-import com.capgemini.capstore.beans.Rating;
 import com.capgemini.capstore.beans.Wishlist;
 import com.capgemini.capstore.services.CustomerServices;
 
@@ -41,12 +40,7 @@ public class CustomerActionController {
 	{
 		customerServices.updateCustomer(customer);
 	}
-	//For Post Man
-	/*@RequestMapping(value="/updateCustomer", method=RequestMethod.POST)
-		public void updateCustomer(Customer customer,Principal principal)
-		{
-			mservices.updateCustomer(customer);
-		}*/
+
 	//customer can display his wishlist
 	@RequestMapping(value="/display" , method=RequestMethod.GET)
 	public Wishlist display (int custid) {
@@ -106,6 +100,7 @@ public class CustomerActionController {
 		customerServices.registerCustomer(customerObj,auth);
 		return "success";
 	}
+
 	//Search for Products(by product name,product brand)
 	@RequestMapping(method=RequestMethod.POST, value={"/searchAction"},produces=MediaType.APPLICATION_JSON_VALUE)
 	public ArrayList<Product> search(@RequestBody String jSon) throws JSONException{
@@ -120,14 +115,6 @@ public class CustomerActionController {
 		return customerServices.retrieveShipmentDetails(customerId);		 
 	}
 
-	//Add Rating to a product
-	@RequestMapping(value="/addRating",method=RequestMethod.POST)
-	public Rating addRating(@RequestBody Rating rating)
-	{
-		Rating rate=customerServices.addRating(rating);
-		return rate;
-
-	}
 	@RequestMapping(value="/validatePromo" ,method=RequestMethod.GET)
 	public void promovalidate(int orderId, String promo){
 		customerServices.applyCoupon(orderId,promo);
