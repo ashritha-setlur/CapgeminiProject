@@ -1,7 +1,10 @@
 package com.capgemini.capstore.controllers;
 
 import java.util.List;
+import java.util.Map;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -90,7 +93,29 @@ public class AdminActionController {
 		adminServices.deleteThirdPartyMerchant(merchantId);
 		return adminServices.viewThirdPartyMerchant();
 	}
+
 	
+	@RequestMapping(value="/saveAvgProductRating", method=RequestMethod.POST)
+	public double saveAvgProductRating(@RequestBody String json) throws JSONException {
+		JSONObject jSon=new JSONObject(json); 
+		double avgProductRating = adminServices.setAvgRatingOfProduct(jSon.getInt("pId"));
+		return avgProductRating;
+		
+	}
+	
+	@RequestMapping(value="/getAvgOfProducts_List", method=RequestMethod.POST)
+	public Map<Integer,Double> getAvgOfProducts_List(@RequestBody String json) throws JSONException {
+		JSONObject jSon=new JSONObject(json); 
+		Map<Integer,Double> product_list = adminServices.AvgOfProducts_List(jSon.getInt("mId"));
+		return product_list;
+	}
+
+	@RequestMapping(value="/saveAvgMerchantRating", method=RequestMethod.POST)
+	public double saveAvgMerchantRating(@RequestBody String json) throws JSONException {
+		JSONObject jSon=new JSONObject(json); 
+		double avgMerchantRating = adminServices.setAvgRatingOfMerchant(jSon.getInt("mId"));
+		return avgMerchantRating;
+	}
 }
 
 
