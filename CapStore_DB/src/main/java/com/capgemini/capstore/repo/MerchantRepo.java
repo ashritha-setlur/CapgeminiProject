@@ -16,4 +16,7 @@ public interface MerchantRepo extends JpaRepository<Merchant, Integer>{
 	
 	@Query("select m from Merchant m where m.merchantId in (select a.authId from Authentication a where a.userAccess='USER_THIRDPARTYMERCHANT' and a.verification='1')")
 	List<Merchant> getRequestedThirdPartyMerchant();
+	
+	@Query("Select merchant from Merchant merchant")
+	public List<Merchant> getAllMerchants();
 }
