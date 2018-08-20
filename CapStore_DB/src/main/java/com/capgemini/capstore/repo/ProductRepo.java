@@ -25,7 +25,7 @@ public interface ProductRepo extends JpaRepository<Product, Integer>, CrudReposi
 	public List<Product> getProductMostlyViewed(String searchedItem);
 	//getting the products based on its ratings  
 	//@Query("select r.product from Rating r where r.product.productName=?1 and r.rating>=(select max(ra.rating) from Rating ra)")
-	@Query("select r.product from Rating r where r.product in (select p from Product p where p.productName =?1) order by r.rating DESC")
+	@Query("select r.product from Rating r where r.product in (select p from Product p where p.productName =?1) order by r.ratingValue DESC")
 	public List<Product> getBestProducts(String searchedItem);
 	@Query("select cart.products from Cart cart where cart.products=?1")
 	public Product getOneProduct(Product product);

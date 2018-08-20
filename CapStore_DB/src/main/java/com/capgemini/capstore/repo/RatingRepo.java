@@ -10,7 +10,7 @@ import com.capgemini.capstore.beans.Product;
 import com.capgemini.capstore.beans.Rating;
 
 public interface RatingRepo extends JpaRepository<Rating, Integer>, CrudRepository<Rating, Integer> {
-	@Query(value = "SELECT r.rating FROM Rating r WHERE r.product.productId=:pId")
+	@Query(value = "SELECT r.ratingValue FROM Rating r WHERE r.product.productId=:pId")
 	public List<Double> getRatingList(@Param(value = "pId")int pId);
 	@Query(value = "SELECT m.merchantInventory.products FROM Merchant m WHERE m.merchantId=:mId")
 	public List<Product> getProductListforMerchant(@Param(value = "mId")int mId);
