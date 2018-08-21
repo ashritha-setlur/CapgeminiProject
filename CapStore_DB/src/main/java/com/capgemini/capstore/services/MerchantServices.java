@@ -5,6 +5,7 @@ import java.util.List;
 import com.capgemini.capstore.beans.Discount;
 import com.capgemini.capstore.beans.Merchant;
 import com.capgemini.capstore.beans.OrderDetails;
+import com.capgemini.capstore.beans.Product;
 import com.capgemini.capstore.beans.Promo;
 
 public interface MerchantServices {
@@ -17,4 +18,8 @@ public interface MerchantServices {
 	public List<Promo> displayAllPromos();
 	public void deletePromo(int promoId);
 	public OrderDetails deliveringProducts(int orderId);
+	public List<OrderDetails> checkOrderDetails(int merchantId);
+	public List<Product> displayMerchantProducts(int merchantId);
+	public Product addProduct(Product product, int merchantId);
+	public int removeProduct(int productId);
 }

@@ -6,16 +6,19 @@ import java.util.Map;
 import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Discount;
 import com.capgemini.capstore.beans.Merchant;
+import com.capgemini.capstore.beans.OrderDetails;
 import com.capgemini.capstore.beans.Product;
 import com.capgemini.capstore.beans.Promo;
 
 public interface AdminServices {
 
 	public int addMerchant(Merchant merchant);
+	public int removeMerchant(int merchantId);
 	public Merchant displaySingleMerchant(int merchantId);
 	public List<Customer> displayAllCustomers();
 	public List<Merchant> displayAllMerchants();
 	public List<Product> displayAllProducts();
+	public List<OrderDetails> displayAllOrders();
 	public void setMinOrderAmount(double amount) ;
 	public List<Merchant> viewThirdPartyMerchantRequest();
 	public void addThirdPartyMerchant(int merchantId);
@@ -33,4 +36,5 @@ public interface AdminServices {
 	public void deletePromo(int promoId);
 	public boolean validateMerchant(int merchantId);
 	public void orderStatus(int orderId, int num);
+	
 }

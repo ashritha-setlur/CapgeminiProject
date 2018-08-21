@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,13 +21,14 @@ public class Category {
 	private int groupCategoryId;
 	private String categoryName;
 	private String categoryDesc;
-	@OneToMany(cascade=CascadeType.ALL)
-	private List<Product> products; 
+	@OneToOne(cascade=CascadeType.ALL)
+	private Product product; 
 
 
 	//Constructors
 	public Category() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public Category(int categoryId) {
@@ -76,11 +78,13 @@ public class Category {
 		this.groupCategoryId = groupCategoryId;
 	}
 
-	public List<Product> getProducts() {
-		return products;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
+
+	
 }
