@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.capstore.beans.Customer;
 import com.capgemini.capstore.beans.Merchant;
+import com.capgemini.capstore.beans.OrderDetails;
 import com.capgemini.capstore.beans.Product;
 import com.capgemini.capstore.services.AdminServices;
 
@@ -28,7 +29,12 @@ public class AdminActionController {
 	public void addMerchant(@RequestBody Merchant merchant) {
 		adminServices.addMerchant(merchant);	
 	}
-
+	
+	@RequestMapping(value = "/removemerchant")
+	public void removemerchant(int merchantId) {
+		adminServices.removeMerchant(merchantId);
+	}
+	
 
 	//Method to get the Single Merchant Details
 
@@ -99,5 +105,12 @@ public class AdminActionController {
 	@RequestMapping(value="/deliveryStatus",method=RequestMethod.GET)
 	public void orderStatus(int orderId,int num){
 		adminServices.orderStatus(orderId,num);
+	}
+	
+	@RequestMapping(value = "/checkAllOrders")
+	public List<OrderDetails> checkAllInventoryOrders() {
+
+		List<OrderDetails> orders=adminServices.displayAllOrders();
+       return orders;
 	}
 }
