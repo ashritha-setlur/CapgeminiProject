@@ -1,6 +1,7 @@
+<%@page import="com.capgemini.capstore.beans.OrderDetails"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,20 +45,9 @@
                     <!-- Nav Start -->
                     <div class="classynav">
                         <ul>
-                           <li><a href="#">Categories</a>
-                                <ul class="dropdown">
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="shop.html">Shop</a></li>
-                                    <li><a href="single-product-details.html">Product Details</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="single-blog.html">Single Blog</a></li>
-                                    <li><a href="regular-page.html">Regular Page</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
-                                </ul>
-                            </li>
+                           
                             
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="getContact">Contact</a></li>
                         </ul>
                     </div>
                     <!-- Nav End -->
@@ -135,28 +125,28 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="first_name">First Name</label>
-                                    <input type="text" class="form-control" name="firstName" id="firstName" value="" disabled>
+                                    <input type="text" class="form-control" name="firstName" id="firstName" value="${order.customer.firstName}" disabled>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="last_name">Last Name</label>
-                                    <input type="text" class="form-control" name="lastName" id="lastName" value="" disabled>
+                                    <input type="text" class="form-control" name="lastName" id="lastName" value="${order.customer.lastName}" disabled>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label for="street_address">Address</label>
-                                    <input type="text" class="form-control mb-3" name="addressLine1" id="addressLine1" value="" disabled>
-                                    <input type="text" class="form-control mb-3" name="addressLine2" id="addressLine2" value="" disabled>
-									<input type="text" class="form-control mb-3" name="city" id="city" value="" disabled>
-									<input type="text" class="form-control mb-3" name="state" id="state" value="" disabled>
-									<input type="text" class="form-control mb-3" name="country" id="country" value="" disabled>
-									<input type="text" class="form-control mb-3" name="pincode" id="pincode" value="" disabled>
+                                    <input type="text" class="form-control mb-3" name="addressLine1" id="addressLine1" value="${order.customer.address.addressLine1}" disabled>
+                                    <input type="text" class="form-control mb-3" name="addressLine2" id="addressLine2" value="${order.customer.address.addressLine2}" disabled>
+									<input type="text" class="form-control mb-3" name="city" id="city" value="${order.customer.address.city}" disabled>
+									<input type="text" class="form-control mb-3" name="state" id="state" value="${order.customer.address.state}" disabled>
+									<input type="text" class="form-control mb-3" name="country" id="country" value="${order.customer.address.country}" disabled>
+									<input type="text" class="form-control mb-3" name="pincode" id="pincode" value="${order.customer.address.pincode}" disabled>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label for="phone_number">Mobile Number</label>
-                                    <input type="number" class="form-control" id="phone_number" min="0" value="" disabled>
+                                    <input type="number" class="form-control" id="phone_number" min="0" value="${order.customer.mobileNo}" disabled>
                                 </div>
                                 <div class="col-12 mb-4">
                                     <label for="email_address">Email Address</label>
-                                    <input type="email" class="form-control" id="email_address" value="" disabled>
+                                    <input type="email" class="form-control" id="email_address" value="${order.customer.email}" disabled>
                                 </div>
                             </div>
                     </div>
@@ -172,10 +162,10 @@
 
                         <ul class="order-details-form mb-4">
                             <li><span>Product</span> <span>Total</span></li>
-                            <li><span>${product.productName}</span> <span>Rs.${product.productPrice}</span></li>
-                            <li><span>Quantity</span> <span>${product.productQuantity}</span></li>
+                            <li><span>${order.product.productName}</span> <span>Rs.${order.product.productPrice}</span></li>
+                            <li><span>Quantity</span> <span></span></li>
                             <li><span>Shipping</span> <span>Free</span></li>
-                            <li><span>Total</span> <span><c:out value="${product.productPrice}*${product.productQuantity}"></c:out></span></li>
+                            <li><span>Total</span> <span>Rs.${order.product.productPrice}</span></li>
                         </ul>
 
                         <div id="accordion" role="tablist" class="mb-4">

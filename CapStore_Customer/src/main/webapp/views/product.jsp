@@ -1,3 +1,5 @@
+<%@page import="com.capgemini.capstore.beans.Product"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -43,19 +45,6 @@
                     <!-- Nav Start -->
                     <div class="classynav">
                         <ul>
-                           
-                            <li><a href="#">Categories</a>
-                                <ul class="dropdown">
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="shop.html">Shop</a></li>
-                                    <li><a href="single-product-details.html">Product Details</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="single-blog.html">Single Blog</a></li>
-                                    <li><a href="regular-page.html">Regular Page</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
-                                </ul>
-                            </li>
                            
                             <li><a href="contact.html">Contact</a></li>
                         </ul>
@@ -120,38 +109,6 @@
                         </div>
                     </a>
                 </div>
-
-                <!-- Single Cart Item -->
-                <div class="single-cart-item">
-                    <a href="#" class="product-image">
-                        <img src="img/product-img/product-2.jpg" class="cart-thumb" alt="">
-                        <!-- Cart Item Desc -->
-                        <div class="cart-item-desc">
-                          <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-                            <span class="badge">Mango</span>
-                            <h6>Button Through Strap Mini Dress</h6>
-                            <p class="size">Size: S</p>
-                            <p class="color">Color: Red</p>
-                            <p class="price">$45.00</p>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Cart Item -->
-                <div class="single-cart-item">
-                    <a href="#" class="product-image">
-                        <img src="img/product-img/product-3.jpg" class="cart-thumb" alt="">
-                        <!-- Cart Item Desc -->
-                        <div class="cart-item-desc">
-                          <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-                            <span class="badge">Mango</span>
-                            <h6>Button Through Strap Mini Dress</h6>
-                            <p class="size">Size: S</p>
-                            <p class="color">Color: Red</p>
-                            <p class="price">$45.00</p>
-                        </div>
-                    </a>
-                </div>
             </div>
 
             <!-- Cart Summary -->
@@ -178,20 +135,20 @@
         <!-- Single Product Thumb -->
         <div class="single_product_thumb clearfix">
             <div class="product_thumbnail_slides owl-carousel">
-                <img src="../resources/img/product-img/product-big-1.jpg" alt="">
-                <img src="../resources/img/product-img/product-big-2.jpg" alt="">
-                <img src="../resources/img/product-img/product-big-3.jpg" alt="">
+                <img src="../resources/img/product-img/iphone-x.png" alt="">
+                <img src="../resources/img/product-img/iphone-x-1.png" alt="">
+                <img src="../resources/img/product-img/iphone-x.png" alt="">
             </div>
         </div>
 
         <!-- Single Product Description -->
         <div class="single_product_desc clearfix">
-            <span>mango</span>
-            <a href="cart.html">
-                <h2>One Shoulder Glitter Midi Dress</h2>
+            <span>${product.productBrand}</span>
+            <a href="addToCart/${product.productId}">
+                <h2>${product.productName}</h2>
             </a>
-            <p class="product-price"><span class="old-price">$65.00</span> $49.00</p>
-            <p class="product-desc">Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin.</p>
+            <p class="product-price">${product.productPrice}</p>
+            <p class="product-desc">${product.productDesc}</p>
 
             <!-- Form -->
             <form class="cart-form clearfix" method="post">
@@ -213,7 +170,7 @@
                 <!-- Cart & Favourite Box -->
                 <div class="cart-fav-box d-flex align-items-center">
                     <!-- Cart -->
-                    <button type="submit" name="addtocart" value="5" class="btn essence-btn">Add to cart</button>
+                    <a href="addToCart/${product.productId}"  class="btn essence-btn">Add to cart</a>
                     <!-- Favourite -->
                     <div class="product-favourite ml-4">
                         <a href="#" class="favme fa fa-heart"></a>

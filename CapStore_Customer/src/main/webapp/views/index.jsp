@@ -46,7 +46,7 @@
                             <li><a href="#">Categories</a>
 							  <ul class="dropdown">
 									<c:forEach items="${categories}" var="category">
-                                    <li><a href="getCategory?${category.categoryId}">${category.categoryDesc }</a></li>
+                                    <li><a href="getCategory/${category.categoryId}">${category.categoryDesc }</a></li>
                                      </c:forEach>
                                 </ul>
 							</li>
@@ -180,7 +180,7 @@
                 <div class="col-12 col-sm-6 col-md-4">
                     <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(../resources/img/bg-img/bg-2.jpg);">
                         <div class="catagory-content">
-                            <a href="getCategory?${category.groupCategoryId}">${category.categoryDesc}</a>
+                            <a href="getCategory/${category.groupCategoryId}">${category.categoryDesc}</a>
                         </div>
                     </div>
                 </div>
@@ -210,13 +210,14 @@
                     <div class="popular-products-slides owl-carousel">
                     
                     <c:forEach items="${categories}" var="category">
+                    <c:forEach items="${category.products}" var="product">
                        <!-- Single Product -->
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
                                 <img src="../resources/img/product-img/product-1.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="../resources/img/product-img/product-2.jpg" alt="">
+                                <a href="getProduct/${product.productId}"><img class="hover-img" src="../resources/img/product-img/iphone-x.png" alt=""></a>
                                 <!-- Favourite -->
                                 <div class="product-favourite">
                                     <a href="#" class="favme fa fa-heart"></a>
@@ -224,21 +225,22 @@
                             </div>
                             <!-- Product Description -->
                             <div class="product-description">
-                                <span>${category.products[0].productName} </span>
-                                <a href="single-product-details.html">
-                                    <h6>${category.products[0].productDesc} </h6>
+                                <span>${product.productName} </span>
+                                <a href="getProduct/${product.productId}">
+                                    <h6>${product.productDesc} </h6>
                                 </a>
-                                <p class="product-price">$80.00</p>
+                                <p class="product-price">${product.productPrice}</p>
 
                                 <!-- Hover Content -->
                                 <div class="hover-content">
                                     <!-- Add to Cart -->
                                     <div class="add-to-cart-btn">
-                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                        <a href="addToCart?productId=${product.productId}" class="btn essence-btn">Add to Cart</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        </c:forEach>
                         </c:forEach>
                         
                         <!-- Single Product -->

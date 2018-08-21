@@ -18,6 +18,8 @@ import org.springframework.web.context.support.HttpRequestHandlerServlet;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.capgemini.capstore.beans.Category;
+import com.capgemini.capstore.beans.OrderDetails;
+import com.capgemini.capstore.beans.Product;
 
 
 @Controller
@@ -26,7 +28,7 @@ public class URIController {
 	@RequestMapping(method=RequestMethod.GET,value="/")
 	public ModelAndView getHomePage() {
 		RestTemplate restTemplate = new RestTemplate();
-		Category[] displayCategories = restTemplate.getForObject("http://localhost:4496/sample.json",Category[].class);
+		Category[] displayCategories = restTemplate.getForObject("http://localhost:4496/index.json",Category[].class);
 		List<Category> categoryList = Arrays.asList(displayCategories);
 		return new ModelAndView("index","categories",categoryList);
 	}
@@ -87,14 +89,18 @@ public class URIController {
 		return "registerCustomer";
 	}
 	
-	@RequestMapping(value="/getProduct")
-	public String getProductPage() {
-		return "product";
+	@RequestMapping(value="/getProduct/{productId}")
+	public ModelAndView getProductPage(@PathVariable int productId ) {
+		RestTemplate restTemplate = new RestTemplate();
+		Product displayProduct = restTemplate.getForObject("http://localhost:4496/product.json",Product.class);
+		return new ModelAndView("product","product",displayProduct);
 	}
 
-	@RequestMapping(value="/getCheckout")
-	public String getCheckoutPage() {
-		return "checkout";
+	@RequestMapping(value="/getProduct/addToCart/{productId}")
+	public ModelAndView getCheckoutPage(@PathVariable int productId) {
+		RestTemplate restTemplate = new RestTemplate();
+		OrderDetails displayOrder = restTemplate.getForObject("http://localhost:4496/order.json",OrderDetails.class);
+		return new ModelAndView("checkout","order",displayOrder);
 	}
 	
 	@RequestMapping(value="/getContact")
@@ -102,7 +108,7 @@ public class URIController {
 		return "contact";
 	}
 	
-	@RequestMapping(value="/getCategory/")
+	@RequestMapping(value="/getCategory/{categoryId}")
 	public String getCategoryPage(@PathVariable int categoryId) {
 		return "category";
 	}
@@ -111,5 +117,11 @@ public class URIController {
 	public String getCustomerProfilePage() {
 		return "customerProfile";
 	}
+	
+	@RequestMapping(value="/getProduct/addToCart/placeOrder")
+	public String getSuccessPage() {
+		return "success";
+	}
+	
 	
 }
