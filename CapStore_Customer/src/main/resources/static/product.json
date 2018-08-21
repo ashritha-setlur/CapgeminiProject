@@ -1,0 +1,9 @@
+
+{
+		"productId":2,
+		"productName":"IPhone X",
+		"productDesc" : "The Latest Flagship From Apple",
+		"productQuantity": 10,
+		"productBrand": "Apple",
+		"productPrice" : 80000.00
+}

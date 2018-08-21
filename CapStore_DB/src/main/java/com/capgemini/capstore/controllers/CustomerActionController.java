@@ -77,7 +77,7 @@ public class CustomerActionController {
 	}
 	@RequestMapping(value="/deliveryStatus",method=RequestMethod.GET)
 	public void orderStatus(int orderId,int num){
-		customerServices.orderStatus(orderId,num);
+		//customerServices.orderStatus(orderId,num);
 	}
 	@RequestMapping(value="/Order",method=RequestMethod.GET)
 	public boolean placeOrder(int custId, int cartId, int prodId){

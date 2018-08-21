@@ -1,0 +1,28 @@
+{
+	"orderId":1,
+	"product":				{
+											"productId":2,
+											"productName":"IPhone X",
+											"product Desc" : "The Latest Flagship From Apple",
+											"productQuantity": 10,
+											"productBrand": "Apple",
+											"productPrice" : 80000
+										},
+	"customer": 			{
+											"firstName" : "Joel",
+											"lastName" : "David",
+											"address" : {
+											
+																	"addressLine1" : "Bleh Bleh",
+																	"addressLine2" : "Poonamallee",
+																	"city" : "Chennai",
+																	"state" : "Tamil Nadu",
+																	"country" : "India",
+																	"pincode" : "600077"
+																	
+																},
+											"mobileNo" : 7299779722,
+											"email" : "joe@gmail.com"
+																	
+									}
+}
