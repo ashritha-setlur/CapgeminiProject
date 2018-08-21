@@ -75,14 +75,8 @@ public class CustomerActionController {
 	public List<Product> topRating(String searchedItem){		
 		return customerServices.getProductRating(searchedItem);
 	}
-<<<<<<< HEAD
-	@RequestMapping(value="/deliveryStatus",method=RequestMethod.GET)
-	public void orderStatus(int orderId,int num){
-		//customerServices.orderStatus(orderId,num);
-	}
-=======
+
 	
->>>>>>> 3599364c6b1d0523ad60ca52aad586559b6f2364
 	@RequestMapping(value="/Order",method=RequestMethod.GET)
 	public boolean placeOrder(int custId, int cartId, int prodId){
 		return customerServices.placeOrder(custId,cartId,prodId);
