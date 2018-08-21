@@ -75,10 +75,7 @@ public class CustomerActionController {
 	public List<Product> topRating(String searchedItem){		
 		return customerServices.getProductRating(searchedItem);
 	}
-	@RequestMapping(value="/deliveryStatus",method=RequestMethod.GET)
-	public void orderStatus(int orderId,int num){
-		customerServices.orderStatus(orderId,num);
-	}
+	
 	@RequestMapping(value="/Order",method=RequestMethod.GET)
 	public boolean placeOrder(int custId, int cartId, int prodId){
 		return customerServices.placeOrder(custId,cartId,prodId);
@@ -120,5 +117,10 @@ public class CustomerActionController {
 	@RequestMapping(value="/applydiscount", method=RequestMethod.GET)
 	public Cart applydiscount(int cartId){
 		return customerServices.applyDiscount(cartId);
+	}
+	
+	@RequestMapping(value="/getSingleProduct", method=RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE)
+	public Product getSingleProduct(int productId) {
+		return customerServices.getProduct(productId);
 	}
 }

@@ -302,5 +302,10 @@ public class CustomerServicesImpl implements CustomerServices {
 		transactionRepo.save(transaction);
 		return transaction.getTransactionId();		
 	}
+
+	@Override
+	public Product getProduct(int productId) {
+		return productRepo.getProduct(productId);
+	}
 }
 

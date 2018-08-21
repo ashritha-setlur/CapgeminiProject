@@ -35,4 +35,6 @@ public interface ProductRepo extends JpaRepository<Product, Integer>, CrudReposi
 	public List<Product> findProductBrand(@Param(value="key") String key);
 	@Query("Select product from Product product")
 	public List<Product> getAllProducts();
+	@Query("Select p from Product p where p.productId=?1")
+	public Product getProduct(int productId);
 }
