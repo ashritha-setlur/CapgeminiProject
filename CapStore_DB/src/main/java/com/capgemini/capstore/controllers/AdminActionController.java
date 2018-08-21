@@ -95,4 +95,9 @@ public class AdminActionController {
 	{
 		return adminServices.validateMerchant(merchantId);
 	}
+	
+	@RequestMapping(value="/deliveryStatus",method=RequestMethod.GET)
+	public void orderStatus(int orderId,int num){
+		adminServices.orderStatus(orderId,num);
+	}
 }
