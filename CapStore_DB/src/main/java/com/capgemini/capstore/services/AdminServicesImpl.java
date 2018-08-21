@@ -61,7 +61,14 @@ public class AdminServicesImpl implements AdminServices {
 		merchantRepo.save(merchant);
 		return  merchant.getMerchantId();
 	}
-
+	
+	@Override
+	public int removeMerchant(int merchantId) {
+		Merchant merchant = merchantRepo.getOne(merchantId);
+		merchantRepo.delete(merchant);
+		return merchantId;
+	}
+	
 	//Method to get Single Merchant Details
 	@Override
 	public Merchant displaySingleMerchant(int merchantId) {
@@ -88,6 +95,12 @@ public class AdminServicesImpl implements AdminServices {
 	public List<Product> displayAllProducts() {
 		List<Product> product = productRepo.getAllProducts();
 		return product;
+	}
+	
+	@Override
+	public List<OrderDetails> displayAllOrders() {
+		List<OrderDetails> listOfOrderDetails = orderDetailsRepo.findAll();
+		return listOfOrderDetails;	
 	}
 
 	@Override
@@ -206,6 +219,7 @@ public class AdminServicesImpl implements AdminServices {
 	}
 
 	//What is num????
+	
 	@Override
 	public void orderStatus(int orderId, int num){
 		if(num==1){
@@ -219,4 +233,7 @@ public class AdminServicesImpl implements AdminServices {
 			orderDetailsRepo.save(order1);
 		}
 	}
+
+	
+
 }

@@ -36,4 +36,6 @@ public interface OrderDetailsRepo extends JpaRepository<OrderDetails, Integer>, 
 	void updateDeliveryStatus(@Param("id")int orderId);
 	@Query(value="select o from OrderDetails o where o.id=?1")
 	public OrderDetails deliveringProducts(int orderId);
+	@Query("Select o from OrderDetails o Where o.product.productMerchant.merchantId = ?1")
+	public List<OrderDetails> findOrdersByMerchantId(int merchantId);
 }

@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,13 +21,13 @@ public class Product {
 	private String productDesc;
 	private int productSize;
 	private int productQuantity;
-	@ManyToOne(cascade=CascadeType.ALL)
+	@OneToOne(mappedBy="product",cascade=CascadeType.ALL)
 	private Rating productRating;
 	@OneToOne(cascade=CascadeType.ALL)
 	private Merchant productMerchant;
 	private Date productAddDate;
 	private Date productDelDate;
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(mappedBy="product",cascade=CascadeType.ALL)
 	private Category productCategory;
 	private double productPrice;
 	private int productViews;
@@ -41,6 +40,39 @@ public class Product {
 	//Constructors
 	public Product() {
 		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", productName=" + productName + ", productDesc=" + productDesc
+				+ ", productSize=" + productSize + ", productQuantity=" + productQuantity + ", productRating="
+				+ productRating + ", productMerchant=" + productMerchant + ", productAddDate=" + productAddDate
+				+ ", productDelDate=" + productDelDate + ", productCategory=" + productCategory + ", productPrice="
+				+ productPrice + ", productViews=" + productViews + ", productImage=" + productImage
+				+ ", productDiscount=" + productDiscount + ", productBrand=" + productBrand + "]";
+	}
+
+	public Product(int productId, String productName, String productDesc, int productSize, int productQuantity,
+			Rating productRating, Merchant productMerchant, Date productAddDate, Date productDelDate,
+			Category productCategory, double productPrice, int productViews, Image productImage,
+			Discount productDiscount, String productBrand) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.productDesc = productDesc;
+		this.productSize = productSize;
+		this.productQuantity = productQuantity;
+		this.productRating = productRating;
+		this.productMerchant = productMerchant;
+		this.productAddDate = productAddDate;
+		this.productDelDate = productDelDate;
+		this.productCategory = productCategory;
+		this.productPrice = productPrice;
+		this.productViews = productViews;
+		this.productImage = productImage;
+		this.productDiscount = productDiscount;
+		this.productBrand = productBrand;
 	}
 
 	public Product(int productId) {

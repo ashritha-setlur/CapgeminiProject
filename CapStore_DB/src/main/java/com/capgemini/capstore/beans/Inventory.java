@@ -28,4 +28,13 @@ public class Inventory {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
+
+	public int getInventoryId() {
+		return inventoryId;
+	}
+
+	public void setInventoryId(int inventoryId) {
+		this.inventoryId = inventoryId;
+	}
+	
 }
